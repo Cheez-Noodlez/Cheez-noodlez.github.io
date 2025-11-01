@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cheez Noodlez - Everything Cheesy</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Lucide Icons for aesthetic buttons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* Setting the default font to Inter and defining a cheesy color palette */
+        :root {
+            --color-cheddar: #f9b115;
+            --color-macaroni: #ffcc66;
+            --color-dark: #3f2a1d;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fef3c7; /* Light creamy background */
+        }
+
+        .cheesy-button {
+            background-color: var(--color-cheddar);
+            color: white;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 0 0 #d97706; /* Darker orange shadow for depth */
+            border: 2px solid #b45309; /* Dark border */
+        }
+
+        .cheesy-button:hover {
+            background-color: #fb923c; /* A lighter hover color */
+            transform: translateY(-2px);
+            box-shadow: 0 6px 0 0 #d97706;
+        }
+
+        .cheesy-button:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 0 #d97706;
+        }
+
+        /* Custom spinner for loading states (if needed later) */
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="min-h-screen flex flex-col items-center justify-start p-4 pt-10">
+
+        <!-- Header/Profile Section -->
+        <header class="text-center mb-8 w-full max-w-lg">
+            <!-- Profile Image Placeholder (Using a cheesy color circle) -->
+            <div class="w-32 h-32 mx-auto rounded-full bg-yellow-500 flex items-center justify-center mb-4 border-4 border-yellow-700 shadow-xl">
+                <!-- Inline SVG Noodle Icon for fun -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
+                    <path d="M12 6c-3.31 0-6 2.69-6 6h12c0-3.31-2.69-6-6-6z"/>
+                </svg>
+            </div>
+
+            <h1 class="text-3xl font-extrabold text-yellow-800 mb-1">CheezNoodlez</h1>
+            <p class="text-lg text-yellow-700 italic">
+                🧀 <span class="font-semibold">The official hub for all things Mac, Cheese, and Noodle-related.</span> 🍜
+            </p>
+        </header>
+
+        <!-- Links Section (Three remaining links) -->
+        <main class="w-full max-w-md space-y-4">
+            
+            <!-- Link 1 (NEW): Cheez Noodlez 3D Catcher -->
+            <a href="https://cheez-noodlez.github.io/3d/" target="_blank" class="cheesy-button block w-full py-4 px-6 text-center rounded-xl text-lg font-bold uppercase tracking-wider">
+                <span data-lucide="box" class="inline-block mr-2 w-5 h-5 align-middle"></span>
+                Cheez Noodlez 3D Catcher
+            </a>
+            
+            <!-- Link 2: Cheez Noodlez Arcade -->
+            <a href="https://cheez-noodlez.github.io/arcade/" target="_blank" class="cheesy-button block w-full py-4 px-6 text-center rounded-xl text-lg font-bold uppercase tracking-wider">
+                <span data-lucide="gamepad" class="inline-block mr-2 w-5 h-5 align-middle"></span>
+                Cheez Noodlez Arcade
+            </a>
+
+            <!-- Link 3: Cheez Noodlez Search -->
+            <a href="https://cheez-noodlez.github.io/search/#gsc.tab=0&gsc.sort=" target="_blank" class="cheesy-button block w-full py-4 px-6 text-center rounded-xl text-lg font-bold uppercase tracking-wider">
+                <span data-lucide="search" class="inline-block mr-2 w-5 h-5 align-middle"></span>
+                Cheez Noodlez Search
+            </a>
+            
+        </main>
+
+        <!-- Footer -->
+        <footer class="mt-12 text-sm text-yellow-900 opacity-80">
+            &copy; <span id="year"></span> Cheez Noodlez. Powered by Cheese.
+        </footer>
+    </div>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Set current year in the footer
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
