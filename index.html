@@ -2,14 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta name="google-adsense-account" content="ca-pub-4557844677309031">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cheez Noodlez - Everything Cheesy</title>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4557844677309031"
-     crossorigin="anonymous"></script>
+    
     <!-- Load Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Load Lucide Icons for aesthetic buttons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Load Google Fonts: Inter for text and Material Symbols for icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
+
     <style>
         /* Setting the default font to Inter and defining a cheesy color palette */
         :root {
@@ -42,9 +46,31 @@
             box-shadow: 0 2px 0 0 #d97706;
         }
 
-        /* Custom spinner for loading states (if needed later) */
-        @keyframes spin {
-            to { transform: rotate(360deg); }
+        /* Styling for Material Symbols */
+        .material-symbols-outlined {
+          font-variation-settings:
+          'FILL' 1,
+          'wght' 400,
+          'GRAD' 0,
+          'opsz' 24
+        }
+        
+        /* Fixed Support Button Styling */
+        #support-button {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            background-color: #ef4444; /* Red-600 */
+            color: white;
+            border-radius: 9999px; /* Full rounded */
+            padding: 1rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s ease-in-out;
+            z-index: 50;
+        }
+        #support-button:hover {
+            transform: scale(1.05);
+            background-color: #dc2626; /* Red-700 */
         }
     </style>
 </head>
@@ -69,24 +95,48 @@
             </p>
         </header>
 
-        <!-- Links Section (Three remaining links) -->
+        <!-- Links Section -->
         <main class="w-full max-w-md space-y-4">
             
-            <!-- Link 1 (NEW): Cheez Noodlez 3D Catcher -->
-            <a href="https://cheez-noodlez.github.io/3d/" target="_blank" class="cheesy-button block w-full py-4 px-6 text-center rounded-xl text-lg font-bold uppercase tracking-wider">
-                <span data-lucide="box" class="inline-block mr-2 w-5 h-5 align-middle"></span>
+            <!-- Link 1: Extension Helper -->
+            <a href="https://cheez-noodlez.github.io/extensions/" target="_blank" class="cheesy-button block w-full py-4 px-6 text-center rounded-xl text-lg font-bold uppercase tracking-wider">
+                <span class="material-symbols-outlined inline-block mr-2 align-middle">extension</span>
+                Extension Helper
+            </a>
+            
+            <!-- Link 2: stars startpage -->
+            <a href="https://cheez-noodlez.github.io/homepage/" target="_blank" class="cheesy-button block w-full py-4 px-6 text-center rounded-xl text-lg font-bold uppercase tracking-wider">
+                <span class="material-symbols-outlined inline-block mr-2 align-middle">star</span>
+                stars startpage
+            </a>
+
+            <!-- Link 3: Cheez Noodlez Rat Animation -->
+            <a href="https://cheez-noodlez.github.io/67/" target="_blank" class="cheesy-button block w-full py-4 px-6 text-center rounded-xl text-lg font-bold uppercase tracking-wider">
+                <span class="material-symbols-outlined inline-block mr-2 align-middle">pets</span>
+                Cheez Noodlez Rat Animation
+            </a>
+
+            <!-- Link 4: Cheez Noodlez Explorer -->
+            <a href="cheez-noodlez.github.io/explorer" target="_blank" class="cheesy-button block w-full py-4 px-6 text-center rounded-xl text-lg font-bold uppercase tracking-wider">
+                <span class="material-symbols-outlined inline-block mr-2 align-middle">compass_calibration</span>
+                Cheez Noodlez Explorer
+            </a>
+
+            <!-- Link 5: Cheez Noodlez 3D Catcher -->
+            <a href="https://kool-koder-kool.github.io/3dcheezreal/" target="_blank" class="cheesy-button block w-full py-4 px-6 text-center rounded-xl text-lg font-bold uppercase tracking-wider">
+                <span class="material-symbols-outlined inline-block mr-2 align-middle">widgets</span>
                 Cheez Noodlez 3D Catcher
             </a>
             
-            <!-- Link 2: Cheez Noodlez Arcade -->
-            <a href="https://cheez-noodlez.github.io/arcade/" target="_blank" class="cheesy-button block w-full py-4 px-6 text-center rounded-xl text-lg font-bold uppercase tracking-wider">
-                <span data-lucide="gamepad" class="inline-block mr-2 w-5 h-5 align-middle"></span>
+            <!-- Link 6: Cheez Noodlez Arcade -->
+            <a href="https://tinyurl.com/cheezarcade" target="_blank" class="cheesy-button block w-full py-4 px-6 text-center rounded-xl text-lg font-bold uppercase tracking-wider">
+                <span class="material-symbols-outlined inline-block mr-2 align-middle">videogame_asset</span>
                 Cheez Noodlez Arcade
             </a>
 
-            <!-- Link 3: Cheez Noodlez Search -->
-            <a href="https://cheez-noodlez.github.io/search/#gsc.tab=0&gsc.sort=" target="_blank" class="cheesy-button block w-full py-4 px-6 text-center rounded-xl text-lg font-bold uppercase tracking-wider">
-                <span data-lucide="search" class="inline-block mr-2 w-5 h-5 align-middle"></span>
+            <!-- Link 7: Cheez Noodlez Search -->
+            <a href="https://kool-koder-kool.github.io/cheeznoodles/" target="_blank" class="cheesy-button block w-full py-4 px-6 text-center rounded-xl text-lg font-bold uppercase tracking-wider">
+                <span class="material-symbols-outlined inline-block mr-2 align-middle">search</span>
                 Cheez Noodlez Search
             </a>
             
@@ -98,10 +148,12 @@
         </footer>
     </div>
 
-    <script>
-        // Initialize Lucide icons
-        lucide.createIcons();
+    <!-- Fixed Support Button (mailto link) -->
+    <a href="mailto:owner@cheez-noodlez.online" id="support-button" target="_blank" class="text-2xl">
+        <span class="material-symbols-outlined align-middle">support_agent</span>
+    </a>
 
+    <script>
         // Set current year in the footer
         document.getElementById('year').textContent = new Date().getFullYear();
     </script>
