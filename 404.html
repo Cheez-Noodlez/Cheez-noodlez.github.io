@@ -1,1 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>:( - Page Not Found</title>
+    <!-- Load Tailwind CSS from CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom font for a clean, non-decorative look */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+        body {
+            font-family: 'Inter', monospace; /* Monospace for that authentic terminal feel */
+        }
 
+        /* Set the background to the iconic blue */
+        .bsod-background {
+            background-color: #0078D4; /* A common, recognizable blue for Win 10/11 BSOD */
+        }
+
+        /* Custom alignment for the text block */
+        .bsod-container {
+            max-width: 900px;
+            text-align: left;
+            padding-left: 10%; /* Keep content slightly off-center left */
+        }
+    </style>
+</head>
+<body class="bsod-background text-white antialiased min-h-screen flex items-center justify-center p-4">
+
+    <!-- BSOD Content Container -->
+    <div class="bsod-container w-full p-6 md:p-10">
+
+        <!-- Sad Face Icon -->
+        <div class="text-[8rem] md:text-[12rem] leading-none mb-10 font-light">
+            :(
+        </div>
+
+        <!-- Main Error Message -->
+        <h1 class="text-3xl md:text-5xl font-normal mb-8 leading-snug">
+            Your browser ran into a problem and needs to take you home.
+        </h1>
+
+        <!-- Call to Action / Error Status -->
+        <p class="text-xl md:text-2xl mb-12 font-light">
+            We're just collecting some routing info, and then we'll send you back to the homepage.
+            <br>
+        </p>
+
+        <!-- QR Code and Stop Code Section -->
+        <div class="flex flex-col sm:flex-row items-start sm:items-end sm:space-x-16 mt-20">
+            <!-- Details Text -->
+            <div class="text-sm md:text-base space-y-2">
+                <p>
+                    For more information about this issue, search online later for this error:
+                </p>
+                <p class="font-bold">
+                    STOP CODE: PAGE_NOT_AVAILABLE
+                </p>
+                <!-- Quick link for the user, mimicking the "More info" link -->
+                <a href="cheez-noodlez.online" class="text-white underline hover:font-semibold transition duration-200 block mt-4">
+                    Click here to instantly return to safety
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
