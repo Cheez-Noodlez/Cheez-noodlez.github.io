@@ -1,4 +1,4 @@
-### Privacy Policy for Cheez Noodlez
+ Privacy Policy for Cheez Noodlez
 
 Effective Date: December 21, 2025
 
