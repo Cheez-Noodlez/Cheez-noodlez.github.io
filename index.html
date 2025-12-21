@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cheez Noodlez</title>
     <link rel="apple-touch-icon" href="icon.png">
     <link rel="icon" type="image/x-icon" href="icon.png">
-    <title>Cheez Noodlez - Everything Cheesy</title>
     
     <!-- Load Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -74,6 +74,24 @@
             transform: scale(1.05);
             background-color: #dc2626; /* Red-700 */
         }
+
+        /* Profile Image Optimization */
+        .profile-container {
+            width: 128px;
+            height: 128px;
+            margin: 0 auto 1rem;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 4px solid #b45309;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            background-color: var(--color-cheddar);
+        }
+
+        .profile-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
     </style>
 </head>
 <body>
@@ -82,18 +100,18 @@
 
         <!-- Header/Profile Section -->
         <header class="text-center mb-8 w-full max-w-lg">
-            <!-- Profile Image Placeholder (Using a cheesy color circle) -->
-            <div class="w-32 h-32 mx-auto rounded-full bg-yellow-500 flex items-center justify-center mb-4 border-4 border-yellow-700 shadow-xl">
-                <!-- Inline SVG Noodle Icon for fun -->
-                <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
-                    <path d="M12 6c-3.31 0-6 2.69-6 6h12c0-3.31-2.69-6-6-6z"/>
-                </svg>
+            <!-- Profile Image optimized for Base64 -->
+            <div class="profile-container">
+                <!-- Replace 'YOUR_BASE64_HERE' with your actual string -->
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAgCAYAAADnnNMGAAACm0lEQVR4AexSTWgTQRT+ZrJJSWpskyZbxIr9AUsLShWrFUS9iH8HEcGD6EXs3ZMXPZRq6609VEFQRBDx5sGjFC/2Yi2m1Ra0tEWaVshPs5s0MT+b7DibbtNsNolKwYNkyMx773vz3jfv21D8g1Uj+SuRa3LV5KquABsAjY50u6vfKp/97b8r9vTKB2nwKIvSzhyybE0e6mLSwCEWe3I1Ur6lGa1KEn14WWWB6SP2XhvqL3Sg/gzf59rgONEApGZc0sBhJj/Y325ua0QqksSe30gjMUscp9sh7HGB2CwAJSBWCyyiE46Tbag7IECNK4vy2NnXxrbGiBrDjUga7e3JLUzY7MdaQBw2gLGNxOapxYTAts8Lx3EvWOD7JWns/IvNdKmlpYAWE+b12TqdoO56IwHhWW1zk/9xbm1Ke18TEFy+Jo32NObxksNEEnx0ageTl2Dt4IXgXfQClskiNelH1i/riG74VEJrE5+KT6zuknTUYEwkda5uWRAtoM46PoV+l0ujLEb4J1KwPiEhMxfQE1tGaGmEGlndAoo8WuTnXXXlm0Vo2QntI+cBfrC0gvR8DM0jc8Q7NEt+zilQ5kMAJ89vSqBGU2BWLi/My0TCkjJoo90wRS6cQDbnLGjnuecjiU9xZHyryIXjyC6FkfKFoO5u/Wqm4O8tBRmsUKUkQABoL+Waa1IJ9shNFC0Pnyi+3MDW3wYRm8wg49r7Rux/1VV0peCaJiHtPaHkVBDKQij/yvSUH+kVCtfthWeFKt0R77yjnuFZIg5+JM23xi/qsMmYSNzXH4vZ1r7p+BcBsfE1xH+4mWf4szaXqfhPAROJVij2vzzovfueeO/PkGb+Wg3bzi5Lsp2G5WprJOVUqYjV5KooTbnE/yPXLwAAAP//i9hQ8wAAAAZJREFUAwAqadpBROeICAAAAABJRU5ErkJggg==" 
+                     alt="Cheez Noodlez Logo" 
+                     class="profile-image"
+                     onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=cheez&backgroundColor=f9b115'">
             </div>
 
-            <h1 class="text-3xl font-extrabold text-yellow-800 mb-1">CheezNoodlez</h1>
+            <h1 class="text-3xl font-extrabold text-yellow-800 mb-1">CheezNoodlez Hub</h1>
             <p class="text-lg text-yellow-700 italic">
-                🧀 <span class="font-semibold">The official hub for all things Mac, Cheese, and Noodle-related.</span> 🍜
+    
             </p>
         </header>
 
@@ -119,25 +137,25 @@
             </a>
 
             <!-- Link 4: Cheez Noodlez Explorer -->
-            <a href="https://cheez-noodlez.github.io/explorer" target="_blank" class="cheesy-button block w-full py-4 px-6 text-center rounded-xl text-lg font-bold uppercase tracking-wider">
+            <a href="cheez-noodlez.github.io/explorer" target="_blank" class="cheesy-button block w-full py-4 px-6 text-center rounded-xl text-lg font-bold uppercase tracking-wider">
                 <span class="material-symbols-outlined inline-block mr-2 align-middle">compass_calibration</span>
                 Cheez Noodlez Explorer
             </a>
 
             <!-- Link 5: Cheez Noodlez 3D Catcher -->
-            <a href="https://cheez-noodlez.github.io/3d/" target="_blank" class="cheesy-button block w-full py-4 px-6 text-center rounded-xl text-lg font-bold uppercase tracking-wider">
+            <a href="https://kool-koder-kool.github.io/3dcheezreal/" target="_blank" class="cheesy-button block w-full py-4 px-6 text-center rounded-xl text-lg font-bold uppercase tracking-wider">
                 <span class="material-symbols-outlined inline-block mr-2 align-middle">widgets</span>
                 Cheez Noodlez 3D Catcher
             </a>
             
             <!-- Link 6: Cheez Noodlez Arcade -->
-            <a href="https://cheez-noodlez.github.io/arcade" target="_blank" class="cheesy-button block w-full py-4 px-6 text-center rounded-xl text-lg font-bold uppercase tracking-wider">
+            <a href="https://tinyurl.com/cheezarcade" target="_blank" class="cheesy-button block w-full py-4 px-6 text-center rounded-xl text-lg font-bold uppercase tracking-wider">
                 <span class="material-symbols-outlined inline-block mr-2 align-middle">videogame_asset</span>
                 Cheez Noodlez Arcade
             </a>
 
             <!-- Link 7: Cheez Noodlez Search -->
-            <a href="https://cheez-noodlez.github.io/search" target="_blank" class="cheesy-button block w-full py-4 px-6 text-center rounded-xl text-lg font-bold uppercase tracking-wider">
+            <a href="https://kool-koder-kool.github.io/cheeznoodles/" target="_blank" class="cheesy-button block w-full py-4 px-6 text-center rounded-xl text-lg font-bold uppercase tracking-wider">
                 <span class="material-symbols-outlined inline-block mr-2 align-middle">search</span>
                 Cheez Noodlez Search
             </a>
