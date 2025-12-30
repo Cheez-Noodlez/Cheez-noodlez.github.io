@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  body { margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; height: 100vh; background: transparent; overflow: hidden; }
+  
+  .badge {
+    width: 400px; height: 400px; /* Now 400px exactly */
+    background: radial-gradient(circle, #FFD700, #FFB900);
+    
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    text-align: center; color: #333; font-family: 'Georgia', serif; font-weight: bold;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    /* 10-point star shape */
+    clip-path: polygon(50% 0%, 61% 38%, 98% 38%, 68% 59%, 79% 91%, 50% 75%, 21% 91%, 32% 59%, 2% 35%, 39% 38%);
+    position: relative; overflow: hidden;
+    animation: float 3s ease-in-out infinite alternate;
+    cursor: pointer; text-decoration: none;
+  }
+
+  .text-box {
+    z-index: 2;
+    width: 60%; /* Safe zone for the text within the star */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .shine {
+    position: absolute; top: 0; left: -150%; width: 70%; height: 100%;
+    background: linear-gradient(to right, transparent 0%, rgba(255, 255, 255, 0.9) 50%, transparent 100%);
+    animation: shine 2s infinite linear;
+    z-index: 3;
+    pointer-events: none;
+  }
+
+  @keyframes float { 0% { transform: translateY(0); } 100% { transform: translateY(-15px); } }
+  @keyframes shine { 0% { left: -150%; } 100% { left: 150%; } }
+</style>
+</head>
+<body>
+  <a href="cheez-noodlez.online" target="_parent" class="badge">
+    <div class="shine"></div>
+    <div class="text-box">
+        <br>
+      <span style="font-size: 70px; margin-top: 5px;">🧀</span>
+      <span style="font-size: 16px; color: #D35400; letter-spacing: 2px;">THE OFFICIAL</span>
+      <span style="font-size: 20px; line-height: 1.1; font-weight: 900;">CHEEZ SQUAD</span>
+      
+    </div>
+  </a>
+</body>
+</html>
