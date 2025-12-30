@@ -245,6 +245,33 @@ function closePopup() {
             <a href="https://cheez-noodlez.online/embed67.html>
                 Join the cheez squad
                 </a>
+                <div class="squad-embed-container">
+  <h3>Join the Official Cheez Squad 🧀</h3>
+  <p>Put this golden star on your site and show your cheesy pride!</p>
+  
+  <div class="code-viewer" id="badgeEmbedCode">
+&lt;iframe src="cheez-noodlez.online/embed.html" width="440" height="440" frameborder="0" scrolling="no" style="overflow:hidden;" allowtransparency="true"&gt;&lt;/iframe&gt;
+  </div>
+
+  <button class="squad-copy-btn" onclick="copySquadBadge()">Copy Embed Code</button>
+</div>
+
+<script>
+function copySquadBadge() {
+  const code = document.getElementById('badgeEmbedCode').innerText;
+  navigator.clipboard.writeText(code).then(() => {
+    const btn = document.querySelector('.squad-copy-btn');
+    btn.innerText = "COPIED! 🏆";
+    btn.style.background = "#27ae60"; // Success Green
+    
+    setTimeout(() => {
+      btn.innerText = "Copy Embed Code";
+      btn.style.background = "#E67E22"; // Reset to Orange
+    }, 2000);
+  });
+}
+</script>
+
         </footer>
     </div>
 
