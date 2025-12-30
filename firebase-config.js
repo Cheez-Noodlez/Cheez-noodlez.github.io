@@ -1,0 +1,17 @@
+ // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-app.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyBR71zhuWbvEsE_oRuhaTSaVjrqNdx3rJU",
+    authDomain: "cheez-noodlez-8cd32.firebaseapp.com",
+    projectId: "cheez-noodlez-8cd32",
+    storageBucket: "cheez-noodlez-8cd32.firebasestorage.app",
+    messagingSenderId: "263079255530",
+    appId: "1:263079255530:web:644c47501a46312d206693"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
