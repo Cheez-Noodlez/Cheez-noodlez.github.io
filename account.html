@@ -1,19 +1,124 @@
-<script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-app.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
 
-  // Your web app's Firebase configuration
-  const firebaseConfig = {
-    apiKey: "AIzaSyBR71zhuWbvEsE_oRuhaTSaVjrqNdx3rJU",
-    authDomain: "cheez-noodlez-8cd32.firebaseapp.com",
-    projectId: "cheez-noodlez-8cd32",
-    storageBucket: "cheez-noodlez-8cd32.firebasestorage.app",
-    messagingSenderId: "263079255530",
-    appId: "1:263079255530:web:644c47501a46312d206693"
-  };
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Member Hub | Cheez Noodlez</title>
+    <!-- Your main stylesheet -->
+    <link rel="stylesheet" href="cheez-noodlez.online">
+    <style>
+        /* Modern Bento Grid Styling */
+        body { background-color: #FFBD88; font-family: 'Fredoka', sans-serif; margin: 0; padding: 20px; }
+        .dashboard { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .card { background: #fffdf2; border-radius: 25px; padding: 25px; border: 4px solid #FFCC00; box-shadow: 6px 6px 0px #E67E22; }
+        
+        /* Grid Layouts */
+        .profile-card { grid-column: span 2; display: flex; align-items: center; gap: 20px; }
+        .stats-card { grid-column: span 1; text-align: center; }
+        .wide-card { grid-column: span 3; }
+        
+        .hidden { display: none !important; }
+        .btn { background: #E67E22; color: white; border: none; padding: 10px 20px; border-radius: 50px; cursor: pointer; font-weight: bold; text-decoration: none; display: inline-block; margin-top: 10px; }
+        .btn:hover { background: #D35400; }
+        
+        .avatar { width: 80px; height: 80px; border-radius: 50%; border: 4px solid #FFCC00; }
+    </style>
+</head>
+<body>
 
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-</script>
+    <div class="dashboard">
+        <!-- HEADER CARD -->
+        <div class="card profile-card">
+            <img src="api.dicebear.com" class="avatar" id="user-avatar">
+            <div>
+                <h1 id="welcome-msg">Pantry Visitor</h1>
+                <p id="auth-status">Join the squad to unlock your stats!</p>
+                <div id="auth-buttons">
+                    <a href="login.html" class="btn" id="login-btn">Log In</a>
+                    <button class="btn hidden" id="logout-btn">Leave Pantry</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- PUBLIC STATS -->
+        <div class="card stats-card">
+            <h3>Pantry Health</h3>
+            <p style="font-size: 40px; margin: 10px 0;">100%</p>
+            <p>The cheese is fresh.</p>
+        </div>
+
+        <!-- MEMBER-ONLY SECTION -->
+        <div id="member-content" class="card wide-card hidden">
+            <h2>Squad Member Tools 🏆</h2>
+            <p>You are now a verified member of the <strong>Official Cheez Squad</strong>.</p>
+            <div style="display: flex; gap: 20px; margin-top: 20px;">
+                <div style="background: #FFD670; padding: 15px; border-radius: 15px; flex: 1;">
+                    <strong>Special Perk:</strong> You can now use the 400px Gold Badge!
+                </div>
+                <div style="background: #FFD670; padding: 15px; border-radius: 15px; flex: 1;">
+                    <strong>Status:</strong> Sharp Cheddar Level
+                </div>
+            </div>
+        </div>
+
+        <!-- GUEST PROMPT -->
+        <div id="guest-content" class="card wide-card">
+            <h2>Want a Golden Badge?</h2>
+            <p>Only logged-in members can access the custom 400px star badges and save their high scores in the arcade.</p>
+            <a href="login.html" class="btn">Become a Member</a>
+        </div>
+    </div>
+
+    <!-- FIREBASE LOGIC -->
+    <script type="module">
+        import { auth } from './firebase-config.js';
+        import { onAuthStateChanged, signOut } from "www.gstatic.com";
+
+        const welcomeMsg = document.getElementById('welcome-msg');
+        const authStatus = document.getElementById('auth-status');
+        const memberContent = document.getElementById('member-content');
+        const guestContent = document.getElementById('guest-content');
+        const loginBtn = document.getElementById('login-btn');
+        const logoutBtn = document.getElementById('logout-btn');
+        const userAvatar = document.getElementById('user-avatar');
+
+        // OBSERVER: Watch the login state
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                // LOGGED IN
+                welcomeMsg.innerText = "Welcome back, Master!";
+                authStatus.innerText = "Member ID: " + user.email;
+                userAvatar.src = user.photoURL || `api.dicebear.com{user.uid}`;
+                
+                memberContent.classList.remove('hidden');
+                logoutBtn.classList.remove('hidden');
+                
+                guestContent.classList.add('hidden');
+                loginBtn.classList.add('hidden');
+            } else {
+                // NOT LOGGED IN
+                welcomeMsg.innerText = "Pantry Visitor";
+                authStatus.innerText = "Join the squad to unlock your stats!";
+                
+                memberContent.classList.add('hidden');
+                logoutBtn.classList.add('hidden');
+                
+                guestContent.classList.remove('hidden');
+                loginBtn.classList.remove('hidden');
+            }
+        });
+
+        // LOGOUT LOGIC
+        window.logout = () => {
+            signOut(auth).then(() => {
+                location.reload();
+            });
+        };
+
+        // Attach logout to button
+        logoutBtn.addEventListener('click', logout);
+    </script>
+</body>
+</html>
+
