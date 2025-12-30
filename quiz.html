@@ -1,0 +1,39 @@
+<html>
+<head>
+    <title>What Type of Cheese Are You?</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="index.js" defer></script>
+</head>
+<body>
+    <div class="quiz-wrap">
+        <h1>What Type of Cheese Are You?</h1>
+        <div id="quiz-container">
+          <div id="quiz-box" style="max-width: 600px; margin: 20px auto; padding: 20px; background: #fff9e6; border: 4px solid #ffcc00; border-radius: 20px; text-align: center; font-family: sans-serif;">
+        <h2 id="quiz-question" style="color: #d35400;">Loading Cheesy Question...</h2>
+    <div id="quiz-options"></div>
+</div>
+
+
+
+    </div>
+    <div id="result-container" style="display: none;">
+        <h2>You are: <span id="cheese-type"></span></h2>
+        <p id="cheese-desc"></p>
+        <button onclick="location.reload()">Take it again!</button>
+        
+    </div>
+</div>
+<div class="share-container">
+    <p>Share the Cheese! 🧀</p>
+    <!-- WhatsApp -->
+    <a href="api.whatsapp.com" target="_blank" class="share-btn wa">WhatsApp</a>
+    
+    <!-- Discord / Link Copy (Simulated) -->
+    <button onclick="copyLink()" class="share-btn copy">Copy Link</button>
+    
+    <!-- Email -->
+    <a href="mailto:?subject=You%20need%20to%20see%20this&body=Check%20out%20Cheez%20Noodlez:%20cheez-noodlez.online" class="share-btn mail">Email</a>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,152 @@
+/* Container for the whole quiz */
+body {
+    /* The primary Mac and Cheese color */
+    background-color: #FFBD88 !important; 
+    
+    /* A cheesy gradient for a more "delicious" 2025 look */
+    background: linear-gradient(180deg, #FFD670 0%, #FFBD88 100%) !important;
+    
+    /* This ensures the color covers the whole screen even if the page is short */
+    min-height: 100vh;
+    margin: 0;
+}
+
+#quiz-box {
+    max-width: 550px;
+    margin: 40px auto;
+    padding: 30px;
+    background: #E67E22; /* Creamy cheese white */
+    border: 6px solid #ffcc00; /* Mac n' cheese yellow */
+    border-radius: 30px;
+    box-shadow: 10px 10px 0px #e67e22; /* Bold orange retro shadow */
+    text-align: center;
+    font-family: 'Comic Sans MS', 'Chalkboard SE', cursive; /* Fun, quirky font */
+}
+
+/* The question text */
+#quiz-question {
+    font-size: 24px;
+    color: #d35400;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Styling the answer buttons */
+.option-btn {
+    display: block;
+    width: 100%;
+    margin: 12px 0;
+    padding: 15px;
+    background: #ffffff;
+    color: #333;
+    border: 3px solid #ffcc00;
+    border-radius: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.1s, background 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 0 #ffcc00; /* 3D effect */
+}
+
+/* Hover and Click effects */
+.option-btn:hover {
+    background: #fff4cc;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 0 #ffcc00;
+}
+
+.option-btn:active {
+    transform: translateY(2px);
+    box-shadow: 0 1px 0 #ffcc00;
+}
+
+/* Result Screen specific styling */
+.result-title {
+    font-size: 32px;
+    color: #e67e22;
+    animation: wiggle 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes wiggle {
+    from { transform: rotate(-2deg); }
+    to { transform: rotate(2deg); }
+}
+
+/* "Try Again" button */
+.reset-btn {
+    margin-top: 20px;
+    padding: 12px 25px;
+    background: #e67e22;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 16px;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+h1 {
+    font-family: 'Arial Black', 'Comic Sans MS', sans-serif;
+    font-size: 60px; /* Big and bold */
+    color: #FFCC00; /* Cheesy Yellow */
+    text-align: center;
+    text-transform: uppercase;
+    
+    /* This creates the 3D 'Noodle' effect */
+    text-shadow: 
+        3px 3px 0px #E67E22, 
+        6px 6px 0px #D35400, 
+        9px 9px 20px rgba(0,0,0,0.2);
+        
+    margin-top: 50px;
+    letter-spacing: 2px;
+    
+    /* Fun wiggle animation */
+    animation: noodleWiggle 2s ease-in-out infinite;
+}
+
+@keyframes noodleWiggle {
+    0%, 100% { transform: rotate(-1deg); }
+    50% { transform: rotate(1deg) scale(1.05); }
+}
+h1::after {
+    content: "🧀";
+    font-size: 40px;
+    vertical-align: middle;
+    margin-left: 15px;
+}
+.share-container {
+    text-align: center;
+    margin: 40px auto;
+    padding: 20px;
+    background: #fff9e6;
+    border: 3px dashed #ffcc00;
+    border-radius: 20px;
+    max-width: 400px;
+}
+
+.share-container p {
+    font-family: 'Fredoka', sans-serif;
+    font-weight: bold;
+    color: #d35400;
+}
+
+.share-btn {
+    display: inline-block;
+    padding: 10px 15px;
+    margin: 5px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    color: white;
+    transition: transform 0.2s;
+    border: none;
+    cursor: pointer;
+}
+
+.share-btn:hover { transform: scale(1.1); }
+
+.wa { background: #25D366; } /* WhatsApp Green */
+.copy { background: #ffcc00; color: #333; } /* Cheese Yellow */
+.mail { background: #e67e22; } /* Noodle Orange */
+
