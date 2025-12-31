@@ -1,6 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script>
+        window.launchGrandOpening = function() {
+    // 1. Play the music instantly
+    const music = document.getElementById('bg-music');
+    music.play();
+    
+    // 2. Hide the launch screen
+    document.getElementById('launch-screen').style.display = 'none';
+    
+    // 3. Start the Midnight Logic
+    console.log("Cheez Squad Grand Opening: Music and Effects Engaged!");
+};
+
+// This part stops the music at exactly midnight
+setInterval(() => {
+    const dist = new Date("January 1, 2026 00:00:00") - new Date();
+    
+    if (dist <= 0) {
+        const music = document.getElementById('bg-music');
+        music.pause(); // Stops the music exactly at 12:00:00 AM
+        
+        if (!window.celebrated) {
+            window.celebrated = true;
+            triggerMidnightProtocol(); // Your 10 Epic Things!
+        }
+    }
+}, 1000);
+        function triggerMidnightProtocol() {
+    // 1. Epic Screen Shake
+    document.body.classList.add('epic-shake');
+    
+    // 2. Global Gold Transformation
+    document.body.classList.add('midnight-gold');
+    
+    // 3. Upgrade the Secret Rat
+    const rat = document.getElementById('member-rat');
+    if(rat) rat.classList.add('golden-rat-reveal');
+
+    // 4. Rainbow Glow on all Dashboard Cards
+    document.querySelectorAll('.card').forEach(card => card.classList.add('rainbow-border'));
+
+    // 5. Flashing Browser Tab Title
+    setInterval(() => { 
+        document.title = document.title === "🎆 HAPPY 2026 🎆" ? "🧀 SQUAD LIVE 🧀" : "🎆 HAPPY 2026 🎆"; 
+    }, 500);
+
+    // 6. Giant Golden Confetti Storm (150 pieces)
+    for(let i=0; i<150; i++) {
+        const c = document.createElement('div');
+        c.style.cssText = `position:fixed; top:-15px; left:${Math.random()*100}vw; width:12px; height:12px; background:${["gold","white","#FFCC00","#E67E22"][Math.floor(Math.random()*4)]}; z-index:10001; transition:transform ${Math.random()*3+2}s linear; border-radius:3px;`;
+        document.body.appendChild(c);
+        setTimeout(() => c.style.transform = `translateY(110vh) rotate(${Math.random()*720}deg)`, 50);
+        setTimeout(() => c.remove(), 6000);
+    }
+
+    // 7. Cheese Cursor Trail (Active for 60 seconds)
+    const trail = (e) => {
+        const t = document.createElement('span');
+        t.innerHTML = "🧀";
+        t.style.cssText = `position:fixed; left:${e.clientX}px; top:${e.clientY}px; pointer-events:none; font-size:25px; z-index:10002; transition: 1s;`;
+        document.body.appendChild(t);
+        setTimeout(() => { t.style.transform = "scale(0.1) rotate(180deg)"; t.style.opacity = "0"; }, 100);
+        setTimeout(() => t.remove(), 1000);
+    };
+    window.addEventListener('mousemove', trail);
+    setTimeout(() => window.removeEventListener('mousemove', trail), 60000);
+
+    // 8. Hall of Fame Pulse
+    const hof = document.getElementById('member-list');
+    if(hof) hof.style.animation = "gold-pulse 1s infinite";
+
+    // 9. Final Launch Alert
+    alert("🚀 CHEEZ SQUAD 2026: GRAND OPENING SUCCESSFUL! 🚀");
+    
+    // 10. Background "New Year" Theme Change
+    const dashboard = document.querySelector('.dashboard');
+    if(dashboard) dashboard.style.filter = "contrast(1.1) brightness(1.1)";
+}
+
+// THE CLOCK: Automatically fires at Midnight
+setInterval(() => {
+    const now = new Date();
+    const newYear = new Date("January 1, 2026 00:00:00");
+    const dist = newYear - now;
+
+    if (dist <= 0 && !window.celebrated) {
+        window.celebrated = true;
+        
+        // Stop the "Final Countdown" music exactly at 0
+        const music = document.getElementById('bg-music');
+        if(music) { music.pause(); music.currentTime = 0; }
+        
+        // FIRE THE EPIC PROTOCOL
+        triggerMidnightProtocol();
+    }
+}, 1000);
+
+
+    </script> 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cheez Squad Hub | PhoenixFeather</title>
@@ -25,6 +124,41 @@
 }
             </script>
     <style>
+        /* 10 Epic Effects Styling by Reid Anan */
+@keyframes shake { 
+    0% { transform: translate(0,0); } 
+    25% { transform: translate(8px,8px); } 
+    50% { transform: translate(-8px,0); } 
+    75% { transform: translate(8px,-8px); }
+    100% { transform: translate(0,0); } 
+}
+
+@keyframes gold-pulse { 
+    0% { box-shadow: 0 0 20px gold; } 
+    50% { box-shadow: 0 0 80px #fff700; } 
+    100% { box-shadow: 0 0 20px gold; } 
+}
+
+.midnight-gold { 
+    background: linear-gradient(135deg, #D4AF37, #FFD700, #D4AF37) !important; 
+    transition: background 3s ease-in-out; 
+}
+
+.epic-shake { animation: shake 0.1s 10; }
+
+.golden-rat-reveal { 
+    filter: drop-shadow(0 0 30px gold) brightness(1.2); 
+    transform: scale(1.2) rotate(360deg); 
+    transition: 2s; 
+    animation: gold-pulse 1s infinite; 
+}
+
+.rainbow-border { 
+    border: 8px solid; 
+    border-image: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet) 1; 
+    animation: gold-pulse 1s infinite; 
+}
+
         /* Modern Bento Grid Styling by Reid Anan */
         body { 
             background-color: #FFBD88; 
@@ -84,6 +218,23 @@
     </style>
 </head>
 <body>
+    <div id="launch-screen" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #FFCC00; z-index: 99999; display: flex; flex-direction: column; justify-content: center; align-items: center; font-family: 'Fredoka', sans-serif;">
+    <h1 style="font-size: 50px; color: #D35400; text-shadow: 3px 3px #fff;">🧀 CHEEZ SQUAD 2026 🧀</h1>
+    <p style="font-size: 20px; color: #A04000;">The Grand Opening is LIVE!</p>
+    <button onclick="launchGrandOpening()" style="padding: 25px 50px; font-size: 30px; background: #E67E22; color: white; border: 5px solid #fff; border-radius: 50px; cursor: pointer; box-shadow: 0 10px 0 #D35400;">
+        ENTER THE PANTRY 🚀
+    </button>
+    <p style="margin-top: 15px;">(Click to enable Epic Music & Effects)</p>
+</div>
+
+<audio id="bg-music" loop>
+    <source src="./final-countdown.mp3" type="audio/mpeg">
+</audio>
+
+<div id="new-year-hype" style="background: linear-gradient(90deg, #E67E22, #FFCC00); color: white; text-align: center; padding: 15px; font-weight: bold; border-bottom: 5px solid #D35400; z-index: 10000; position: relative;">
+    <span id="countdown-msg">CHEER FOR 2026 IN: </span>
+    <span id="timer" style="font-size: 24px; text-shadow: 2px 2px #A04000;">00:00:00</span>
+</div>
 
     <div class="dashboard">
         <!-- TOP PROFILE CARD -->
@@ -139,6 +290,7 @@
                     <strong>Arcade:</strong><br>Saving High Scores
                 </div>
             </div>
+            
             <div class="card" style="margin-top: 20px; background: #FFF9E6; border: 3px dashed #FFCC00;">
     <h4 style="margin-top:0;">🏆 Your Official Gold Badge Embed</h4>
     <p style="font-size: 13px;">Copy this code to show your Cheez Squad status on other websites!</p>
