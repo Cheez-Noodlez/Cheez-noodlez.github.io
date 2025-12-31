@@ -6,6 +6,24 @@
     <title>Cheez Squad Hub | PhoenixFeather</title>
     <!-- Modern Font for that Cheezy look -->
     <link href="https://fonts.googleapis.com" rel="stylesheet">
+    <script>
+        window.copyBadgeCode = function() {
+    const embedCode = '<iframe src="cheez-noodlez.online" width="440" height="440" frameborder="0" scrolling="no" style="overflow:hidden;" allowtransparency="true"></iframe>';
+    
+    navigator.clipboard.writeText(embedCode).then(() => {
+        const btn = document.getElementById('copyBtn');
+        btn.innerText = "✅ Code Copied!";
+        btn.style.background = "#27AE60"; // Turn green
+
+        setTimeout(() => {
+            btn.innerText = "Copy Code to Clipboard";
+            btn.style.background = "#E67E22"; // Turn back to orange
+        }, 2000);
+    }).catch(err => {
+        console.error("Could not copy text: ", err);
+    });
+}
+            </script>
     <style>
         /* Modern Bento Grid Styling by Reid Anan */
         body { 
@@ -103,6 +121,17 @@
                     <strong>Arcade:</strong><br>Saving High Scores
                 </div>
             </div>
+            <div class="card" style="margin-top: 20px; background: #FFF9E6; border: 3px dashed #FFCC00;">
+    <h4 style="margin-top:0;">🏆 Your Official Gold Badge Embed</h4>
+    <p style="font-size: 13px;">Copy this code to show your Cheez Squad status on other websites!</p>
+    
+    <div style="background: #333; color: #00FF00; padding: 10px; border-radius: 10px; font-family: monospace; font-size: 11px; margin-bottom: 10px; overflow-x: auto;">
+        <span id="codeText">&lt;iframe src="cheez-noodlez.online" width="440" height="440" frameborder="0" scrolling="no" style="overflow:hidden;" allowtransparency="true"&gt;&lt;/iframe&gt;</span>
+    </div>
+
+    <button class="btn" onclick="copyBadgeCode()" id="copyBtn" style="width: 100%;">Copy Code to Clipboard</button>
+</div>
+
         </div>
 
         <!-- GUEST PROMPT (Only shows when logged out) -->
