@@ -97,6 +97,45 @@ setInterval(() => {
         triggerMidnightProtocol();
     }
 }, 1000);
+function startCheezCountdown() {
+    const timerElement = document.getElementById('timer');
+    
+    const countdownInterval = setInterval(() => {
+        const now = new Date();
+        
+        // Use this format to make sure the browser knows it's tonight!
+        const newYear = new Date(2026, 0, 1, 0, 0, 0); 
+        
+        const distance = newYear - now;
+
+        if (distance <= 0) {
+            clearInterval(countdownInterval);
+            timerElement.innerHTML = "00:00:00";
+            
+            if (!window.celebrated) {
+                window.celebrated = true;
+                // Stop music and start 10 Epic Things
+                const music = document.getElementById('bg-music');
+                if(music) { music.pause(); music.currentTime = 0; }
+                triggerMidnightProtocol(); 
+            }
+            return;
+        }
+
+        // Time calculations
+        const hours = Math.floor(distance / 3600000);
+        const minutes = Math.floor((distance % 3600000) / 60000);
+        const seconds = Math.floor((distance % 60000) / 1000);
+
+        // Update display with "0" padding
+        timerElement.innerHTML = 
+            (hours < 10 ? "0" + hours : hours) + ":" + 
+            (minutes < 10 ? "0" + minutes : minutes) + ":" + 
+            (seconds < 10 ? "0" + seconds : seconds);
+            
+    }, 1000);
+}
+
 
 
     </script> 
