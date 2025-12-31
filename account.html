@@ -103,31 +103,31 @@ function startCheezCountdown() {
     const countdownInterval = setInterval(() => {
         const now = new Date();
         
-        // Use this format to make sure the browser knows it's tonight!
-        const newYear = new Date(2026, 0, 1, 0, 0, 0); 
+        // This format (YYYY-MM-DDTHH:MM:SS) is the only one that works everywhere!
+        const newYear = new Date('2026-01-01T00:00:00'); 
         
-        const distance = newYear - now;
+        const distance = newYear.getTime() - now.getTime();
 
+        // If the timer is finished
         if (distance <= 0) {
             clearInterval(countdownInterval);
             timerElement.innerHTML = "00:00:00";
             
             if (!window.celebrated) {
                 window.celebrated = true;
-                // Stop music and start 10 Epic Things
                 const music = document.getElementById('bg-music');
                 if(music) { music.pause(); music.currentTime = 0; }
-                triggerMidnightProtocol(); 
+                triggerMidnightProtocol(); // Your 10 Epic Things!
             }
             return;
         }
 
-        // Time calculations
-        const hours = Math.floor(distance / 3600000);
-        const minutes = Math.floor((distance % 3600000) / 60000);
-        const seconds = Math.floor((distance % 60000) / 1000);
+        // Precise math for the countdown
+        const hours = Math.floor(distance / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-        // Update display with "0" padding
+        // Add the "0" padding (e.g., 05:09:01)
         timerElement.innerHTML = 
             (hours < 10 ? "0" + hours : hours) + ":" + 
             (minutes < 10 ? "0" + minutes : minutes) + ":" + 
@@ -135,6 +135,10 @@ function startCheezCountdown() {
             
     }, 1000);
 }
+
+// MAKE SURE TO CALL THE FUNCTION!
+startCheezCountdown();
+
 
 
 
@@ -291,13 +295,13 @@ function startCheezCountdown() {
 
     <!-- Google Button -->
     <button class="btn" id="login-btn">
-        <img src="www.gstatic.com" width="18" style="vertical-align:middle; margin-right:8px;">
+        <img src="https://www.gstatic.com/marketing-cms/assets/images/d5/dc/cfe9ce8b4425b410b49b7f2dd3f3/g.webp=s96-fcrop64=1,00000000ffffffff-rw" width="18" style="vertical-align:middle; margin-right:8px;">
         Login with Google
     </button>
     
     <!-- GitHub Button (New!) -->
     <button class="btn" id="github-login" style="background: #24292e;">
-        <img src="github.githubassets.com" width="18" style="vertical-align:middle; margin-right:8px; filter: invert(1);">
+        <img src="https://github.githubassets.com/assets/GitHub-Mark-ea2971cee799.png" width="18" style="vertical-align:middle; margin-right:8px; filter: invert(1);">
         Login with GitHub
     </button>
 
