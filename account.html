@@ -200,6 +200,7 @@ import {getAuth, onAuthStateChanged, signOut, signInWithPopup, GoogleAuthProvide
                 logoutBtn.classList.remove('hidden');
                 guestContent.classList.add('hidden');
                 loginBtn.classList.add('hidden');
+                githubBtn.classList.add('hidden');
             } else {
                 // USER IS LOGGED OUT
                 welcomeMsg.innerText = "Pantry Visitor";
@@ -210,6 +211,7 @@ import {getAuth, onAuthStateChanged, signOut, signInWithPopup, GoogleAuthProvide
                 logoutBtn.classList.add('hidden');
                 guestContent.classList.remove('hidden');
                 loginBtn.classList.remove('hidden');
+                githubBtn.classList.remove('hidden');
             }
         });
 
