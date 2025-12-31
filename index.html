@@ -166,6 +166,13 @@ function closePopup() {
     cursor: pointer;
     color: #D35400;
 }
+        #squad-link:hover {
+    transform: scale(1.1) rotate(10deg);
+}
+#squad-link:hover #squad-label {
+    display: block;
+}
+
 
     </style>
 </head>
@@ -289,6 +296,40 @@ function copySquadBadge() {
         <a href="quiz.html" class="popup-link" onclick="closePopup()">TAKE THE QUIZ</a>
     </div>
 </div>
+<!-- Floating Squad Button -->
+<a href="account.html" id="squad-link" style="
+    position: fixed; 
+    bottom: 30px; 
+    right: 30px; 
+    background: #E67E22; 
+    color: white; 
+    width: 70px; 
+    height: 70px; 
+    border-radius: 50%; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    text-decoration: none; 
+    font-size: 30px; 
+    border: 5px solid #FFCC00; 
+    box-shadow: 0 8px 15px rgba(0,0,0,0.2); 
+    z-index: 10005;
+    transition: transform 0.2s;
+">
+    🧀
+    <!-- Small label that appears on hover -->
+    <span style="
+        position: absolute; 
+        right: 80px; 
+        background: #333; 
+        color: white; 
+        padding: 5px 10px; 
+        border-radius: 10px; 
+        font-size: 14px; 
+        white-space: nowrap; 
+        display: none;
+    " id="squad-label">Member Hub</span>
+</a>
 
 </body>
 </html>
