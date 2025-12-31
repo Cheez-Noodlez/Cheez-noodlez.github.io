@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cheez Squad | 2026 Grand Opening Timer</title>
+    <link href="fonts.googleapis.com" rel="stylesheet">
+    <style>
+        body { background: #FFBD88; font-family: 'Fredoka', sans-serif; text-align: center; margin: 0; transition: 3s; overflow-x: hidden; }
+        
+        /* 1. Hype Bar & Clock Styling */
+        #hype-bar {
+            background: linear-gradient(90deg, #E67E22, #FFCC00);
+            color: white; padding: 25px; font-weight: bold;
+            border-bottom: 5px solid #D35400; position: sticky; top: 0; z-index: 1000;
+        }
+        #timer { font-size: 80px; text-shadow: 4px 4px #A04000; font-family: monospace; display: block; margin: 10px 0; }
+
+        /* 2. Launch Screen (Required for Sound) */
+        #launch-screen {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #FFCC00; z-index: 99999; display: flex;
+            flex-direction: column; justify-content: center; align-items: center;
+        }
+        .btn {
+            padding: 25px 50px; font-size: 30px; background: #E67E22;
+            color: white; border: 5px solid #fff; border-radius: 50px;
+            cursor: pointer; box-shadow: 0 10px 0 #D35400; font-family: 'Fredoka';
+        }
+
+        /* 3. Midnight Effects Animations */
+        @keyframes shake { 0% { transform: translate(0,0); } 25% { transform: translate(10px,10px); } 50% { transform: translate(-10px,0); } 100% { transform: translate(0,0); } }
+        .epic-shake { animation: shake 0.1s 15; }
+        .midnight-gold { background: linear-gradient(135deg, #D4AF37, #FFD700, #D4AF37) !important; }
+        .confetti { position: fixed; width: 12px; height: 12px; z-index: 10001; border-radius: 3px; }
+    </style>
+</head>
+<body>
+
+    <!-- LAUNCH SCREEN -->
+    <div id="launch-screen">
+        <h1 style="font-size: 60px; color: #D35400; margin-bottom: 20px;">🧀 CHEEZ SQUAD 2026 🧀</h1>
+        <button class="btn" onclick="startGrandOpening()">ENTER THE PANTRY 🚀</button>
+        <p style="margin-top: 20px;">Click to enable Music & Midnight Effects</p>
+    </div>
+
+    <!-- TIMER BAR -->
+    <div id="hype-bar">
+        CHEER FOR 2026 IN:
+        <span id="timer">00:00:00</span>
+    </div>
+
+    <div style="padding: 50px;">
+        <h2>The Grand Opening is Tonight!</h2>
+        <p>The music will start automatically at 11:55 PM.</p>
+        <p>At Midnight, the site will transform into its 2026 Golden Version.</p>
+    </div>
+
+    <!-- THE MUSIC -->
+    <audio id="bg-music">
+        <source src="./final-countdown.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        const music = document.getElementById('bg-music');
+        let musicStarted = false;
+
+        // 1. Initial Launch
+        window.startGrandOpening = function() {
+            document.getElementById('launch-screen').style.display = 'none';
+        };
+
+        // 2. Clock Logic (Updated for Dec 31, 2025)
+        setInterval(() => {
+            const now = new Date();
+            const target = new Date('2026-01-01T00:00:00'); // Targeted for Midnight Tonight
+            const distance = target.getTime() - now.getTime();
+
+            // Display Logic
+            if (distance <= 0) {
+                document.getElementById('timer').innerHTML = "HAPPY 2026!";
+                if (!window.celebrated) {
+                    window.celebrated = true;
+                    if(music) { music.pause(); music.currentTime = 0; }
+                    triggerMidnightProtocol();
+                }
+                return;
+            }
+
+            // Start Music at 11:55 PM (300,000ms before midnight)
+            if (distance < 300000 && !musicStarted) {
+                music.play();
+                musicStarted = true;
+            }
+
+            const h = Math.floor(distance / 3600000);
+            const m = Math.floor((distance % 3600000) / 60000);
+            const s = Math.floor((distance % 60000) / 1000);
+
+            document.getElementById('timer').innerHTML = 
+                (h < 10 ? "0" + h : h) + ":" + 
+                (m < 10 ? "0" + m : m) + ":" + 
+                (s < 10 ? "0" + s : s);
+        }, 1000);
+
+        // 3. The 10 Epic Effects
+        function triggerMidnightProtocol() {
+            document.body.classList.add('epic-shake');
+            document.body.classList.add('midnight-gold');
+            document.title = "🎆 HAPPY 2026 🎆";
+            
+            // Confetti Storm
+            for(let i=0; i<150; i++) {
+                const c = document.createElement('div');
+                c.className = 'confetti';
+                c.style.left = Math.random() * 100 + "vw";
+                c.style.top = "-15px";
+                c.style.backgroundColor = ["gold", "white", "#E67E22", "#FFCC00"][Math.floor(Math.random()*4)];
+                c.style.transition = `transform ${Math.random()*3+2}s linear`;
+                document.body.appendChild(c);
+                setTimeout(() => c.style.transform = `translateY(110vh) rotate(720deg)`, 50);
+                setTimeout(() => c.remove(), 6000);
+            }
+            
+            // Final Alert
+            setTimeout(() => {
+                alert("🚀 CHEEZ SQUAD 2026: GRAND OPENING SUCCESSFUL! 🚀");
+            }, 500);
+        }
+    </script>
+</body>
+</html>
