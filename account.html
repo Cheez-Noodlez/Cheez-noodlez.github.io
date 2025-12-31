@@ -149,6 +149,21 @@
 
     <button class="btn" onclick="copyBadgeCode()" id="copyBtn" style="width: 100%;">Copy Code to Clipboard</button>
 </div>
+            <div id="rat-perk-zone" style="text-align: center; padding: 20px; background: #fffdf2; border-radius: 25px; border: 4px solid #FFCC00; margin-top: 20px;">
+    <div style="position: relative; display: inline-block;">
+        <!-- The Floating Member Crown -->
+        <div style="position: absolute; top: -30px; left: 50%; transform: translateX(-50%); font-size: 45px; z-index: 10;">👑</div>
+        
+        <!-- Your Rat GIF (Make sure secret-rat.gif is in your GitHub folder) -->
+        <img src="./secret-rat.gif" id="member-rat" class="squad-glow" 
+             style="width: 220px; border-radius: 20px; cursor: pointer; border: 5px solid #FFCC00; box-shadow: 0 0 20px #FFCC00;" 
+             onclick="feedRat(event)">
+    </div>
+    
+    <h3 style="color: #D35400; margin-top: 15px;">Squad Rat: <span id="cheese-count">0</span> Cheezes Eaten</h3>
+    <button class="btn" onclick="feedRat(event)">Feed the Rat 🧀</button>
+</div>
+
 
         </div>
 
@@ -269,6 +284,40 @@ emailBtn.addEventListener('click', () => {
         logoutBtn.addEventListener('click', () => {
             signOut(auth);
         });
+        let count = 0;
+
+window.feedRat = function(event) {
+    // 1. Update the counter
+    count++;
+    document.getElementById('cheese-count').innerText = count;
+
+    // 2. Create the flying cheese element
+    const cheese = document.createElement('div');
+    cheese.innerText = "🧀";
+    cheese.style.position = "fixed";
+    
+    // Position it where you clicked
+    cheese.style.left = (event.clientX - 15) + "px";
+    cheese.style.top = (event.clientY - 15) + "px";
+    
+    cheese.style.fontSize = "30px";
+    cheese.style.zIndex = "1000";
+    cheese.style.pointerEvents = "none";
+    cheese.style.transition = "all 0.8s cubic-bezier(0.18, 0.89, 0.32, 1.28)";
+    
+    document.body.appendChild(cheese);
+
+    // 3. Trigger the animation (fly up and spin)
+    setTimeout(() => {
+        cheese.style.transform = "translateY(-150px) rotate(360deg) scale(1.5)";
+        cheese.style.opacity = "0";
+    }, 50);
+
+    // 4. Remove from the DOM after animation finishes
+    setTimeout(() => {
+        cheese.remove();
+    }, 800);
+};
     </script>
 </body>
 </html>
