@@ -92,10 +92,22 @@
             <div>
                 <h1 id="welcome-msg" style="margin:0;">Pantry Visitor</h1>
                 <p id="auth-status" style="margin:5px 0;">Join the squad to unlock your stats!</p>
-                <div id="auth-buttons">
-                    <button class="btn" id="login-btn">Log In with Google</button>
-                    <button class="btn hidden" id="logout-btn">Leave Pantry</button>
-                </div>
+               <div id="auth-buttons" style="display: flex; gap: 10px; flex-wrap: wrap;">
+    <!-- Google Button -->
+    <button class="btn" id="login-btn">
+        <img src="www.gstatic.com" width="18" style="vertical-align:middle; margin-right:8px;">
+        Login with Google
+    </button>
+    
+    <!-- GitHub Button (New!) -->
+    <button class="btn" id="github-login" style="background: #24292e;">
+        <img src="github.githubassets.com" width="18" style="vertical-align:middle; margin-right:8px; filter: invert(1);">
+        Login with GitHub
+    </button>
+
+    <button class="btn hidden" id="logout-btn">Leave Pantry</button>
+</div>
+
             </div>
         </div>
 
@@ -146,7 +158,7 @@
     <script type="module">
         // 1. Import Firebase Libraries
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-app.js";
-import {getAuth, onAuthStateChanged, signOut, signInWithPopup, GoogleAuthProvider } from 'https://www.gstatic.com/firebasejs/12.7.0/firebase-auth.js';
+import {getAuth, onAuthStateChanged, signOut, signInWithPopup, GoogleAuthProvider, GithubAuthProvider } from 'https://www.gstatic.com/firebasejs/12.7.0/firebase-auth.js';
 
 
         // 2. YOUR FIREBASE CONFIG (Paste your real config from Google here!)
@@ -164,6 +176,8 @@ import {getAuth, onAuthStateChanged, signOut, signInWithPopup, GoogleAuthProvide
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const provider = new GoogleAuthProvider();
+        const githubProvider = new GithubAuthProvider();
+
 
         // 4. Get UI Elements
         const welcomeMsg = document.getElementById('welcome-msg');
@@ -203,6 +217,23 @@ import {getAuth, onAuthStateChanged, signOut, signInWithPopup, GoogleAuthProvide
         loginBtn.addEventListener('click', () => {
             signInWithPopup(auth, provider).catch(err => alert("Error: " + err.message));
         });
+        const githubBtn = document.getElementById('github-login');
+
+githubBtn.addEventListener('click', () => {
+    signInWithPopup(auth, githubProvider)
+        .then((result) => {
+            console.log("GitHub Squad Member Authenticated!");
+        })
+        .catch((error) => {
+            // This happens if they already used Google with the same email
+            if (error.code === 'auth/account-exists-with-different-credential') {
+                alert("This email is already linked to Google. Please log in with Google!");
+            } else {
+                alert("GitHub Error: " + error.message);
+            }
+        });
+});
+
 
         // 7. Logout Function
         logoutBtn.addEventListener('click', () => {
