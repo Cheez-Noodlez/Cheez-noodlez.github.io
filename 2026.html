@@ -55,6 +55,15 @@
         <p>The music will start automatically at 11:55 PM.</p>
         <p>At Midnight, the site will transform into its 2026 Golden Version.</p>
     </div>
+    <!-- THE SECRET RAT PERK -->
+<div style="text-align: center; margin-top: 20px;">
+    <div style="position: relative; display: inline-block;">
+        <div style="position: absolute; top: -30px; left: 50%; transform: translateX(-50%); font-size: 40px; z-index: 10;">👑</div>
+        <img src="./secret-rat.gif" id="member-rat" style="width: 220px; border-radius: 20px; border: 5px solid #FFCC00; cursor: pointer; transition: 2s;" onclick="feedRat(event)">
+    </div>
+    <h3 style="color: #D35400;">Squad Rat: <span id="cheese-count">0</span> Cheezes</h3>
+</div>
+
 
     <!-- THE MUSIC -->
     <audio id="bg-music">
@@ -127,6 +136,17 @@
                 alert("🚀 CHEEZ SQUAD 2026: GRAND OPENING SUCCESSFUL! 🚀");
             }, 500);
         }
+        let count = 0;
+window.feedRat = function(event) {
+    count++;
+    document.getElementById('cheese-count').innerText = count;
+    const t = document.createElement('div');
+    t.innerText = "🧀";
+    t.style.cssText = `position:fixed; left:${event.clientX}px; top:${event.clientY}px; font-size:30px; z-index:9999; transition:1s; pointer-events:none;`;
+    document.body.appendChild(t);
+    setTimeout(() => { t.style.transform = "translateY(-100px) opacity(0)"; setTimeout(() => t.remove(), 1000); }, 50);
+};
+
     </script>
 </body>
 </html>
