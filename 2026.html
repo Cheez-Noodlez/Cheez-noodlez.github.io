@@ -58,7 +58,7 @@
     <!-- THE SECRET RAT PERK -->
 <div style="text-align: center; margin-top: 20px;">
     <div style="position: relative; display: inline-block;">
-        <div style="position: absolute; top: -30px; left: 50%; transform: translateX(-50%); font-size: 40px; z-index: 10;">👑</div>
+        <div id="rat-crown" onclick="stealCrown()" style="position: absolute; top: -30px; left: 50%; transform: translateX(-50%); font-size: 40px; z-index: 10; cursor: grab;">👑</div>
         <img src="./secret-rat.gif" id="member-rat" style="width: 220px; border-radius: 20px; border: 5px solid #FFCC00; cursor: pointer; transition: 2s;" onclick="feedRat(event)">
     </div>
     <h3 style="color: #D35400;">Squad Rat: <span id="cheese-count">0</span> Cheezes</h3>
@@ -101,6 +101,56 @@ window.startCheezCountdown();
     const music = document.getElementById('bg-music');
     if(music) music.play(); // This starts the party!
 };
+        // Global counter
+let count = 0;
+
+window.feedRat = function(event) {
+    // 1. Update the counter
+    count++;
+    const countEl = document.getElementById('cheese-count');
+    if (countEl) countEl.innerText = count;
+
+    // 2. Create the flying cheese element
+    const cheese = document.createElement('div');
+    cheese.innerText = "🧀";
+    cheese.style.position = "fixed";
+    
+    // Position it exactly where you clicked the mouse
+    cheese.style.left = (event.clientX - 15) + "px";
+    cheese.style.top = (event.clientY - 15) + "px";
+    
+    cheese.style.fontSize = "30px";
+    cheese.style.zIndex = "10002"; // Stays above everything
+    cheese.style.pointerEvents = "none";
+    cheese.style.transition = "all 0.8s cubic-bezier(0.18, 0.89, 0.32, 1.28)";
+    
+    document.body.appendChild(cheese);
+
+    // 3. Trigger the animation (fly up, spin, and disappear)
+    setTimeout(() => {
+        cheese.style.transform = "translateY(-150px) rotate(360deg) scale(1.5)";
+        cheese.style.opacity = "0";
+    }, 50);
+
+    // 4. Remove the element so the site doesn't get slow
+    setTimeout(() => {
+        cheese.remove();
+    }, 800);
+};
+        window.triggerEffect = function() {
+    // 1. Apply a temporary visual style
+    document.body.style.filter = "grayscale(100%)"; // Example: grayscale effect
+    document.body.classList.add('temporary-effect'); // Add a class for more styling
+
+    // 2. Revert the style after a few seconds
+    setTimeout(() => {
+        document.body.style.filter = "none";
+        document.body.classList.remove('temporary-effect');
+        console.log("Visual effect ended.");
+    }, 3000); // Effect lasts for 3 seconds
+};
+
+
 </script>
 </body>
 </html>
