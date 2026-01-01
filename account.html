@@ -512,6 +512,51 @@ window.feedRat = function(event) {
         cheese.remove();
     }, 800);
 };
+        // 1. Put this at the very top of your script (under imports)
+let cheeseScore = 0;
+
+// 2. The Rat Feeder function (NO LEADERBOARD)
+window.feedRat = function(event) {
+    // Add to score
+    cheeseScore++;
+    
+    // Update the number on screen
+    const countDisplay = document.getElementById('cheese-count');
+    if (countDisplay) {
+        countDisplay.innerText = cheeseScore;
+    }
+
+    // CREATE THE FLYING CHEESE
+    const cheese = document.createElement('div');
+    cheese.innerText = "🧀";
+    cheese.style.cssText = `
+        position: fixed; 
+        left: ${event.clientX - 15}px; 
+        top: ${event.clientY - 15}px; 
+        font-size: 30px; 
+        z-index: 10005; 
+        pointer-events: none; 
+        transition: 0.8s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+    `;
+    document.body.appendChild(cheese);
+
+    // Make the cheese fly up and vanish
+    setTimeout(() => {
+        cheese.style.transform = "translateY(-150px) rotate(360deg) scale(0)";
+        cheese.style.opacity = "0";
+        setTimeout(() => cheese.remove(), 800);
+    }, 50);
+};
+
+// 3. The 403 Easter Egg (The Crown)
+window.stealCrown = function() {
+    alert("❌ ERROR 403: Forbidden\nYou have taken the Rat's Crown!");
+    document.body.style.filter = "grayscale(100%) invert(100%)";
+    setTimeout(() => {
+        document.body.style.filter = "none";
+    }, 3000);
+};
+
     </script>
 </body>
 </html>
