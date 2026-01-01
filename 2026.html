@@ -149,6 +149,31 @@ window.feedRat = function(event) {
         console.log("Visual effect ended.");
     }, 3000); // Effect lasts for 3 seconds
 };
+        window.stealCrown = function() {
+    // 1. Show the "Scary" Alert
+    alert("❌ ERROR 403: Forbidden\n\nYou have stolen the Rat's Crown.\nAccess to the Cheez Squad Hub is now RESTRICTED.");
+
+    // 2. Hide the crown and glitch the site
+    const crown = document.getElementById('rat-crown');
+    if (crown) crown.style.visibility = "hidden";
+    
+    document.body.style.filter = "grayscale(100%) invert(100%)";
+    document.body.style.backgroundColor = "black";
+    
+    // 3. Shake the screen
+    document.body.classList.add('epic-shake-active');
+
+    // 4. Reset everything after 3 seconds
+    setTimeout(() => {
+        document.body.style.filter = "none";
+        document.body.style.backgroundColor = "#FFBD88";
+        document.body.classList.remove('epic-shake-active');
+        if (crown) crown.style.visibility = "visible";
+        
+        console.log("System Restored. Don't touch the crown again, Reid!");
+    }, 3000);
+};
+
 
 
 </script>
