@@ -1,6 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script>
+        window.startGrandOpening = function() {
+    // 1. Hide the entry screen
+    const launchScreen = document.getElementById('launch-screen');
+    if (launchScreen) launchScreen.style.display = 'none';
+
+    // 2. FORCE THE MUSIC (This bypasses the browser block)
+    const music = document.getElementById('bg-music');
+    if (music) {
+        music.play().catch(err => console.log("Music play blocked: " + err));
+    }
+
+    // 3. Start the Countdown Logic
+    console.log("Cheez Squad 2026: Grand Opening Initialized!");
+    if (typeof startCheezCountdown === "function") {
+        startCheezCountdown();
+    }
+};
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cheez Squad | 2026 Grand Opening Timer</title>
