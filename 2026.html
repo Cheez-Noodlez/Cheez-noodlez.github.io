@@ -55,6 +55,12 @@
         <p>The music will start automatically at 11:55 PM.</p>
         <p>At Midnight, the site will transform into its 2026 Golden Version.</p>
     </div>
+    <div class="card" style="border: 4px solid #FFD700; background: #FFF9E6;">
+    <h2 style="color: #E67E22; text-align: center;">🏆 Squad Leaderboard</h2>
+    <div id="leaderboard-list" style="display: flex; flex-direction: column; gap: 8px;">
+        <p style="text-align: center;">Loading the top Cheezlings...</p>
+    </div>
+</div>
     <!-- THE SECRET RAT PERK -->
 <div style="text-align: center; margin-top: 20px;">
     <div style="position: relative; display: inline-block;">
@@ -102,41 +108,41 @@ window.startCheezCountdown();
     if(music) music.play(); // This starts the party!
 };
         // Global counter
-let count = 0;
+// Ensure 'count' is defined at the top of your script
+let count = 0; 
 
 window.feedRat = function(event) {
-    // 1. Update the counter
-    count++;
-    const countEl = document.getElementById('cheese-count');
-    if (countEl) countEl.innerText = count;
+    // 1. Update the local counter on the screen
+    count++; 
+    const cheeseDisplay = document.getElementById('cheese-count');
+    if (cheeseDisplay) cheeseDisplay.innerText = count;
+    
+    // 2. SAVE TO LEADERBOARD (Firestore)
+    // This sends your new score to the cloud!
+    if (typeof saveScore === "function") {
+        saveScore(count); 
+    }
 
-    // 2. Create the flying cheese element
+    // 3. The Flying Cheese Animation (Keep this part!)
     const cheese = document.createElement('div');
     cheese.innerText = "🧀";
-    cheese.style.position = "fixed";
-    
-    // Position it exactly where you clicked the mouse
-    cheese.style.left = (event.clientX - 15) + "px";
-    cheese.style.top = (event.clientY - 15) + "px";
-    
-    cheese.style.fontSize = "30px";
-    cheese.style.zIndex = "10002"; // Stays above everything
-    cheese.style.pointerEvents = "none";
-    cheese.style.transition = "all 0.8s cubic-bezier(0.18, 0.89, 0.32, 1.28)";
-    
+    cheese.style.cssText = `
+        position: fixed; 
+        left: ${event.clientX - 15}px; 
+        top: ${event.clientY - 15}px; 
+        font-size: 30px; 
+        z-index: 10002; 
+        pointer-events: none; 
+        transition: 1s;
+    `;
     document.body.appendChild(cheese);
 
-    // 3. Trigger the animation (fly up, spin, and disappear)
     setTimeout(() => {
-        cheese.style.transform = "translateY(-150px) rotate(360deg) scale(1.5)";
-        cheese.style.opacity = "0";
+        cheese.style.transform = "translateY(-150px) rotate(360deg) scale(0)";
+        setTimeout(() => cheese.remove(), 1000);
     }, 50);
-
-    // 4. Remove the element so the site doesn't get slow
-    setTimeout(() => {
-        cheese.remove();
-    }, 800);
 };
+
         window.triggerEffect = function() {
     // 1. Apply a temporary visual style
     document.body.style.filter = "grayscale(100%)"; // Example: grayscale effect
@@ -173,6 +179,48 @@ window.feedRat = function(event) {
         console.log("System Restored. Don't touch the crown again, Reid!");
     }, 3000);
 };
+        import { getFirestore, collection, query, orderBy, limit, getDocs, doc, setDoc } from "www.gstatic.com";
+
+const db = getFirestore(app);
+
+// --- FUNCTION: UPDATE LEADERBOARD ---
+async function showLeaderboard() {
+    const listDiv = document.getElementById('leaderboard-list');
+    const q = query(collection(db, "leaderboard"), orderBy("score", "desc"), limit(5));
+    const querySnapshot = await getDocs(q);
+
+    listDiv.innerHTML = ""; // Clear the loading text
+    let rank = 1;
+
+    querySnapshot.forEach((doc) => {
+        const data = doc.data();
+        const entry = document.createElement('div');
+        entry.style = "display: flex; justify-content: space-between; padding: 10px; background: white; border-radius: 10px; border: 2px solid #FFD700; font-weight: bold;";
+        
+        // Give the #1 spot a crown!
+        let rankIcon = rank === 1 ? "👑" : `#${rank}`;
+        entry.innerHTML = `<span>${rankIcon} ${data.name}</span> <span>${data.score} 🧀</span>`;
+        listDiv.appendChild(entry);
+        rank++;
+    });
+}
+
+// --- FUNCTION: SAVE YOUR SCORE ---
+window.saveScore = async function(newScore) {
+    if (auth.currentUser) {
+        const userRef = doc(db, "leaderboard", auth.currentUser.uid);
+        await setDoc(userRef, {
+            name: auth.currentUser.displayName || "Cheezling",
+            score: newScore,
+            lastUpdated: new Date()
+        }, { merge: true });
+        showLeaderboard(); // Refresh the list
+    }
+};
+
+// Start by showing the board
+showLeaderboard();
+
 
 
 
