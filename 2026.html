@@ -244,5 +244,57 @@ showLeaderboard();
 
 
 </script>
+    <script type="module">
+        import { getFirestore, collection, query, orderBy, limit, getDocs, doc, setDoc } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-auth.js";
+
+const db = getFirestore(app);
+let count = 0;
+
+// --- LEADERBOARD LOGIC ---
+async function updateLeaderboardUI() {
+    const listDiv = document.getElementById('leaderboard-list');
+    const q = query(collection(db, "leaderboard"), orderBy("score", "desc"), limit(5));
+    const querySnapshot = await getDocs(q);
+
+    listDiv.innerHTML = "";
+    let rank = 1;
+    querySnapshot.forEach((doc) => {
+        const data = doc.data();
+        const entry = document.createElement('div');
+        entry.style = "display:flex; justify-content:space-between; padding:8px; border-bottom:1px solid #eee;";
+        entry.innerHTML = `<span>#${rank} ${data.name}</span> <b>${data.score} 🧀</b>`;
+        listDiv.appendChild(entry);
+        rank++;
+    });
+}
+
+// --- RAT FEEDING LOGIC ---
+window.feedRat = async function(event) {
+    count++;
+    document.getElementById('cheese-count').innerText = count;
+
+    // Save to Cloud
+    if (auth.currentUser) {
+        await setDoc(doc(db, "leaderboard", auth.currentUser.uid), {
+            name: auth.currentUser.displayName || "Cheezling",
+            score: count
+        }, { merge: true });
+        updateLeaderboardUI();
+    }
+
+    // Flying Cheese Animation
+    const t = document.createElement('div');
+    t.innerText = "🧀";
+    t.style.cssText = `position:fixed; left:${event.clientX}px; top:${event.clientY}px; font-size:30px; transition:1s; pointer-events:none; z-index:9999;`;
+    document.body.appendChild(t);
+    setTimeout(() => {
+        t.style.transform = "translateY(-100px) opacity(0)";
+        setTimeout(() => t.remove(), 1000);
+    }, 50);
+};
+
+// Initial Load
+updateLeaderboardUI();
+    </script>
 </body>
 </html>
