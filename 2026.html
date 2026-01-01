@@ -146,6 +146,31 @@ window.feedRat = function(event) {
     document.body.appendChild(t);
     setTimeout(() => { t.style.transform = "translateY(-100px) opacity(0)"; setTimeout(() => t.remove(), 1000); }, 50);
 };
+        window.stealCrown = function() {
+    // 1. The Fake Error Message
+    alert("❌ ERROR 403: Forbidden\n\nYou have taken the Rat's Crown.\nAccess to the Pantry is now restricted.");
+
+    // 2. The Visual "Glitch"
+    document.body.style.filter = "grayscale(100%) invert(100%)";
+    document.getElementById('welcome-msg').innerText = "FORBIDDEN USER";
+    
+    // 3. Shake the screen
+    document.body.classList.add('epic-shake-active');
+
+    // 4. Return to normal after 3 seconds (The Reset)
+    setTimeout(() => {
+        document.body.style.filter = "none";
+        document.body.classList.remove('epic-shake-active');
+        document.getElementById('welcome-msg').innerText = "Just kidding! You're still in the Squad.";
+    }, 3000);
+};
+const crown = document.getElementById('rat-crown');
+crown.style.display = 'none'; // Crown disappears!
+
+setTimeout(() => {
+    crown.style.display = 'block'; // Crown comes back!
+}, 3000);
+
 
     </script>
 </body>
