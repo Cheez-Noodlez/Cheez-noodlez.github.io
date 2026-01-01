@@ -71,44 +71,36 @@
     </audio>
 
     <script>
-       function startGrandOpeningTimer() {
-    const timerElement = document.getElementById('timer');
-    
-   setInterval(() => {
-    const now = new Date().getTime();
-    
-    // TRICK: new Date(year, monthIndex, day, hours, minutes, seconds)
-    // IMPORTANT: Month 0 is January, so 0 = January 1st.
-    const target = new Date(2026, 0, 1, 0, 0, 0).getTime();
-    
-    const distance = target - now;
+     // Add this inside your script tag
+window.startCheezCountdown = function() {
+    setInterval(() => {
+        const now = new Date().getTime();
+        const target = new Date(2026, 0, 1, 0, 0, 0).getTime();
+        const distance = target - now;
 
-    // 1. Check if Midnight hit
-    if (distance <= 0) {
-        document.getElementById('timer').innerHTML = "HAPPY 2026!";
-        if (!window.celebrated) {
-            window.celebrated = true;
-            if (typeof triggerMidnightProtocol === "function") triggerMidnightProtocol();
+        const timerEl = document.getElementById('timer');
+        if (distance <= 0) {
+            timerEl.innerHTML = "HAPPY 2026!";
+            return;
         }
-        return;
-    }
 
-    // 2. Precise Math (Math.floor prevents any decimals)
-    const h = Math.floor(distance / 3600000);
-    const m = Math.floor((distance % 3600000) / 60000);
-    const s = Math.floor((distance % 60000) / 1000);
+        const h = Math.floor(distance / 3600000);
+        const m = Math.floor((distance % 3600000) / 60000);
+        const s = Math.floor((distance % 60000) / 1000);
 
-    // 3. Update the HTML
-    const timerEl = document.getElementById('timer');
-    if (timerEl) {
-        timerEl.innerHTML = 
-            (h < 10 ? "0" + h : h) + ":" + 
-            (m < 10 ? "0" + m : m) + ":" + 
-            (s < 10 ? "0" + s : s);
-    }
-}, 1000);
+        timerEl.innerHTML = `${h < 10 ? '0'+h : h}:${m < 10 ? '0'+m : m}:${s < 10 ? '0'+s : s}`;
+    }, 1000);
+}
+window.startCheezCountdown();
+
 
 
     </script>
+    <script>window.startGrandOpening = function() {
+    document.getElementById('launch-screen').style.display = 'none';
+    const music = document.getElementById('bg-music');
+    if(music) music.play(); // This starts the party!
+};
+</script>
 </body>
 </html>
