@@ -51,11 +51,7 @@ setInterval(() => {
     // 4. Rainbow Glow on all Dashboard Cards
     document.querySelectorAll('.card').forEach(card => card.classList.add('rainbow-border'));
 
-    // 5. Flashing Browser Tab Title
-    setInterval(() => { 
-        document.title = document.title === "🧀 SQUAD LIVE 🧀"; 
-    }, 500);
-
+   
     // 6. Giant Golden Confetti Storm (150 pieces)
     for(let i=0; i<150; i++) {
         const c = document.createElement('div');
