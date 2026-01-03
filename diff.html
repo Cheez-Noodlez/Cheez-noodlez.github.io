@@ -169,26 +169,43 @@
         }
     };
 
-    // 4. Save Score to Cloud
-    async function winLevel() {
-        score++;
-        document.getElementById('my-score').innerText = score;
+    // This function must match the ID "leaderboard-list" above
+async function updateLeaderboard() {
+    const listDiv = document.getElementById('leaderboard-list');
+    if (!listDiv) return;
 
-        // Only save if the user is logged in
-        if (currentUser) {
-            const userRef = doc(db, "cheeseHunt", currentUser.uid);
-            await setDoc(userRef, {
-                name: currentUser.displayName || "Cheezling",
-                score: Number(score),
-                lastActive: new Date()
-            }, { merge: true });
-        }
+    const q = query(collection(db, "cheeseHunt"), orderBy("score", "desc"), limit(5));
+    const snap = await getDocs(q);
+
+    listDiv.innerHTML = ""; 
+    let rank = 1;
+    snap.forEach((doc) => {
+        const d = doc.data();
+        listDiv.innerHTML += `<div style="display:flex; justify-content:space-between; padding:5px; border-bottom:1px solid #eee;">
+            <span>#${rank} ${d.name}</span> <b>${d.score} 🧀</b>
+        </div>`;
+        rank++;
+    });
+}
+
+// RUN THE BOARD ON LOAD
+updateLeaderboard();
+
+// AND UPDATE IT WHEN YOU WIN
+async function winLevel() {
+    score++;
+    document.getElementById('my-score').innerText = score;
+    if (currentUser) {
+        await setDoc(doc(db, "cheeseHunt", currentUser.uid), {
+            name: currentUser.displayName || "Cheezling",
+            score: Number(score)
+        }, { merge: true });
         
-        generateGrid();
+        updateLeaderboard(); // This refreshes the div you just added!
     }
-
-    // Start
     generateGrid();
+}
+
 </script>
 
 </html>
