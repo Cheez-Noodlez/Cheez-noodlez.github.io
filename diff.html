@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find the Butter! | Cheez Squad 2026</title>
+    <link href="fonts.googleapis.com" rel="stylesheet">
+    <style>
+        body { 
+            background: #FFBD88; 
+            font-family: 'Fredoka', sans-serif; 
+            text-align: center; 
+            padding: 20px;
+        }
+        .game-card {
+            background: white;
+            max-width: 450px;
+            margin: 0 auto;
+            padding: 20px;
+            border-radius: 25px;
+            border: 5px solid #D4AF37;
+            box-shadow: 10px 10px 0px #E67E22;
+        }
+        #cheese-grid {
+            display: grid;
+            grid-template-columns: repeat(10, 1fr);
+            gap: 5px;
+            width: 380px;
+            height: 380px;
+            margin: 20px auto;
+            background: #f9f9f9;
+            padding: 10px;
+            border-radius: 15px;
+            border: 2px solid #eee;
+        }
+        .cheese-item {
+            font-size: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.1s;
+        }
+        .cheese-item:hover { transform: scale(1.2); }
+        .btn {
+            background: #E67E22;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="game-card">
+        <h1 style="color: #D4AF37; margin: 0;">🧈 SPOT THE BUTTER</h1>
+        <p>Find the one stick of butter among the cheeses!</p>
+        
+        <div id="cheese-grid"></div>
+
+        <h2 style="background: #FFCC00; display: inline-block; padding: 10px 20px; border-radius: 50px;">
+            Score: <span id="my-score">0</span>
+        </h2>
+
+        <br>
+        <a href="index.html" class="btn">← Back to Hub</a>
+    </div>
+
+    <script>
+        let score = 0;
+
+        function generateGrid() {
+            const grid = document.getElementById('cheese-grid');
+            grid.innerHTML = '';
+            
+            // Pick a random spot for the butter (0 to 99)
+            const diffIndex = Math.floor(Math.random() * 100);
+
+            for (let i = 0; i < 100; i++) {
+                const item = document.createElement('div');
+                item.classList.add('cheese-item');
+
+                if (i === diffIndex) {
+                    item.innerText = "🧈"; // The Difference
+                    item.onclick = function() {
+                        score++;
+                        document.getElementById('my-score').innerText = score;
+                        // Shake the grid on win
+                        grid.style.transform = "scale(1.05)";
+                        setTimeout(() => { grid.style.transform = "scale(1)"; }, 100);
+                        generateGrid(); 
+                    };
+                } else {
+                    item.innerText = "🧀"; // The Normal Cheese
+                    item.onclick = function() {
+                        this.style.opacity = "0.2"; // Fade out wrong ones
+                    };
+                }
+                grid.appendChild(item);
+            }
+        }
+
+        // Start the game
+        generateGrid();
+    </script>
+</body>
+  <script type="module">
+    // 1. Firebase Imports
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-app.js";
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-app.js";
+    import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-app.js";
+
+    // 2. YOUR FIREBASE CONFIG (Paste your actual config here!)
+  const firebaseConfig = {
+  apiKey: "AIzaSyBR71zhuWbvEsE_oRuhaTSaVjrqNdx3rJU",
+  authDomain: "cheez-noodlez-8cd32.firebaseapp.com",
+  projectId: "cheez-noodlez-8cd32",
+  storageBucket: "cheez-noodlez-8cd32.firebasestorage.app",
+  messagingSenderId: "263079255530",
+  appId: "1:263079255530:web:644c47501a46312d206693"
+};
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    let score = 0;
+    let currentUser = null;
+
+    // Monitor Login Status
+    onAuthStateChanged(auth, (user) => {
+        currentUser = user;
+        if (!user) {
+            alert("Please log in on the main page to save your high scores!");
+        }
+    });
+
+    // 3. The Game Logic
+    window.generateGrid = function() {
+        const grid = document.getElementById('cheese-grid');
+        grid.innerHTML = '';
+        const diffIndex = Math.floor(Math.random() * 100);
+
+        for (let i = 0; i < 100; i++) {
+            const item = document.createElement('div');
+            item.classList.add('cheese-item');
+            if (i === diffIndex) {
+                item.innerText = "🧈";
+                item.onclick = () => winLevel();
+            } else {
+                item.innerText = "🧀";
+                item.onclick = function() { this.style.opacity = "0.2"; };
+            }
+            grid.appendChild(item);
+        }
+    };
+
+    // 4. Save Score to Cloud
+    async function winLevel() {
+        score++;
+        document.getElementById('my-score').innerText = score;
+
+        // Only save if the user is logged in
+        if (currentUser) {
+            const userRef = doc(db, "cheeseHunt", currentUser.uid);
+            await setDoc(userRef, {
+                name: currentUser.displayName || "Cheezling",
+                score: Number(score),
+                lastActive: new Date()
+            }, { merge: true });
+        }
+        
+        generateGrid();
+    }
+
+    // Start
+    generateGrid();
+</script>
+
+</html>
