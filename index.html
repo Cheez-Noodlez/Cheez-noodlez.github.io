@@ -397,8 +397,41 @@ body {
 #squad-link:hover #squad-label {
     display: block;
 }
+        #squad-header {
+    -webkit-app-region: drag; /* <--- THIS MAKES THE HEADER DRAGGABLE */
+    cursor: move;
+}
+
+/* Make sure buttons inside the header can still be clicked */
+#squad-header button, #squad-header a {
+    -webkit-app-region: no-drag;
+}
+
     </style>
 </head>
+    <div id="squad-header" style="-webkit-app-region: drag; background: #333; color: gold; display: flex; justify-content: space-between; padding: 10px;">
+    <span>🧀 CHEEZ SQUAD HUB</span>
+    <div style="-webkit-app-region: no-drag;">
+        <!-- Minimize Button -->
+        <button onclick="minimizeMe()" style="cursor: pointer; background: none; border: none; color: gold; font-size: 20px;">—</button>
+        <!-- Close Button -->
+        <button onclick="closeMe()" style="cursor: pointer; background: #E67E22; border: none; color: white; padding: 5px 10px; margin-left: 10px;">X</button>
+    </div>
+</div>
+
+<script>
+    // This talks to the main.js logic above
+    const { ipcRenderer } = require('electron');
+
+    function minimizeMe() {
+        ipcRenderer.send('minimize-app');
+    }
+
+    function closeMe() {
+        ipcRenderer.send('close-app');
+    }
+</script>
+
 <body>
     <div id="launch-screen" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #FFCC00; z-index: 99999; display: flex; flex-direction: column; justify-content: center; align-items: center; font-family: 'Fredoka', sans-serif;">
     <h1 style="font-size: 50px; color: #D35400; text-shadow: 3px 3px #fff;">🧀 CHEEZ SQUAD 2026 🧀</h1>
