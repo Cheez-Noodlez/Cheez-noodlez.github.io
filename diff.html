@@ -196,7 +196,7 @@ async function winLevel() {
     score++;
     document.getElementById('my-score').innerText = score;
     if (currentUser) {
-        await setDoc(doc(db, "cheeseHunt", currentUser.uid), {
+        await setDoc(doc(db, "cheesehunt", currentUser.uid), {
             name: currentUser.displayName || "Cheezling",
             score: Number(score)
         }, { merge: true });
