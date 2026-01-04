@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cheez Noodlez Store | 2026 Downloads</title>
+    <link href="fonts.googleapis.com" rel="stylesheet">
+    <link rel="stylesheet" href="fonts.googleapis.com" />
+    <style>
+        body {
+            background: #FFBD88; /* Reid's Signature Orange */
+            font-family: 'Fredoka', sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        .store-container {
+            width: 100%;
+            max-width: 500px; /* Centered single card */
+        }
+
+        .app-card {
+            background: white;
+            border: 5px solid #D4AF37; /* Gold */
+            border-radius: 25px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 10px 10px 0px #E67E22;
+        }
+
+        .icon-box {
+            font-size: 80px;
+            color: #D4AF37;
+            margin-bottom: 15px;
+        }
+
+        .version-badge {
+            background: #eee;
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 12px;
+            color: #666;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .download-btn {
+            background: #E67E22;
+            color: white;
+            text-decoration: none;
+            padding: 18px 35px;
+            border-radius: 50px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            border: 3px solid #FFCC00;
+            box-shadow: 0 4px 0 #D35400;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
+        .download-btn:active {
+            transform: translateY(4px);
+            box-shadow: none;
+        }
+
+        .coming-soon {
+            margin-top: 30px;
+            opacity: 0.7;
+            background: rgba(255,255,255,0.3);
+            padding: 15px;
+            border-radius: 15px;
+            border: 2px dashed #333;
+        }
+
+        .back-btn {
+            margin-top: 40px;
+            color: #333;
+            text-decoration: none;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>🧀 Cheez Noodlez Store</h1>
+        <p>Official 2026 Software Download Center</p>
+    </div>
+
+    <div class="store-container">
+
+        <!-- THE ONLY ACTIVE APP: Cheez Squad Hub -->
+        <div class="app-card">
+            <div class="icon-box">
+                <span class="material-symbols-outlined" style="font-size: 100px;">hub</span>
+            </div>
+            <h2>Cheez Squad Hub</h2>
+            <div class="version-badge">Version 1.0 (Windows EXE)</div>
+            <p>The main 2026 dashboard. Access the pantry, chat, and member perks directly from your desktop.</p>
+            
+            <!-- MAKE SURE YOUR FILENAME IS EXACTLY THIS IN THE EXES FOLDER -->
+            <a href="exes/cheezsquad2026.exe" download="CheezSquad2026.exe" class="download-btn">
+                <span class="material-symbols-outlined">download</span> DOWNLOAD EXE 🚀
+            </a>
+        </div>
+
+        <!-- COMING SOON SECTION -->
+        <div class="coming-soon">
+            <p style="margin:0; font-weight:bold;">🕒 COMING SOON TO THE STORE:</p>
+            <p style="margin:5px 0 0 0; font-size:14px;">3D Catcher, Extension Helper, and Squad Arcade EXE.</p>
+        </div>
+
+    </div>
+
+    <a href="index.html" class="back-btn">
+        <span class="material-symbols-outlined">arrow_back</span> Back to Pantry
+    </a>
+
+</body>
+</html>
