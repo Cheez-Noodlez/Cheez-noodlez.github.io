@@ -24,7 +24,6 @@ document.getElementById('sendBtn').addEventListener('click', () => {
             console.error("SMS Error:", error);
             alert("Check Console for Error!");
         });
-};
 
 window.verifyOTP = function() {
     const code = document.getElementById('otpCode').value;
