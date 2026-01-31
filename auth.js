@@ -1,7 +1,17 @@
-import { getAuth, RecaptchaVerifier, signInWithPhoneNumber } from "https://cheez-noodlez-8cd32.firebaseapp.com";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
+import { getAuth, RecaptchaVerifier, signInWithPhoneNumber } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
 
-const auth = getAuth();
+const firebaseConfig = {
+  apiKey: "AIzaSyBR71zhuWbvEsE_oRuhaTSaVjrqNdx3rJU",
+  authDomain: "cheez-noodlez-8cd32.firebaseapp.com",
+  projectId: "cheez-noodlez-8cd32",
+  storageBucket: "cheez-noodlez-8cd32.firebasestorage.app",
+  messagingSenderId: "263079255530",
+  appId: "1:263079255530:web:644c47501a46312d206693"
+};
 
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
 // 1. Setup the Anti-Bot check
 window.recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
   'size': 'invisible'
