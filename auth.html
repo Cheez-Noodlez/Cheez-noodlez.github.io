@@ -1,0 +1,56 @@
+<div id="pantry-gate">
+    <h3>🔐 SMS GATEWAY</h3>
+    
+    <!-- Step 1: Enter Phone -->
+    <div id="step-1">
+        <input type="tel" id="phoneNumber" placeholder="+1 555-555-5555">
+        <button class="btn" onclick="sendOTP()">SEND CODE 📲</button>
+    </div>
+
+    <!-- Step 2: Enter Code (Hidden at first) -->
+    <div id="step-2" style="display:none;">
+        <input type="text" id="otpCode" placeholder="Enter 6-digit code">
+        <button class="btn" onclick="verifyOTP()">VERIFY & ENTER 🧀</button>
+    </div>
+
+    <!-- Required for Firebase Bot Protection -->
+    <div id="recaptcha-container"></div>
+</div>
+<script>
+  import { getAuth, RecaptchaVerifier, signInWithPhoneNumber } from "https://www.gstatic.com";
+
+const auth = getAuth();
+
+// 1. Setup the "Anti-Bot" check
+window.recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
+  'size': 'invisible'
+});
+
+// 2. Send the SMS
+window.sendOTP = function() {
+    const number = document.getElementById('phoneNumber').value;
+    const appVerifier = window.recaptchaVerifier;
+
+    signInWithPhoneNumber(auth, number, appVerifier)
+        .then((confirmationResult) => {
+            window.confirmationResult = confirmationResult;
+            document.getElementById('step-1').style.display = 'none';
+            document.getElementById('step-2').style.display = 'block';
+            console.log("SMS Sent to the Squad!");
+        }).catch((error) => {
+            alert("Error: " + error.message);
+        });
+};
+
+// 3. Verify the Code
+window.verifyOTP = function() {
+    const code = document.getElementById('otpCode').value;
+    window.confirmationResult.confirm(code).then((result) => {
+        const user = result.user;
+        window.location.href = "hub.html"; // Access Granted!
+    }).catch((error) => {
+        alert("Invalid Code!");
+    });
+};
+
+</script>
