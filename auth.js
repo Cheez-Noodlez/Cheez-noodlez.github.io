@@ -1,4 +1,4 @@
-import { getAuth, RecaptchaVerifier, signInWithPhoneNumber } from "https://www.gstatic.com";
+import { getAuth, RecaptchaVerifier, signInWithPhoneNumber } from "cheez-noodlez-8cd32.firebaseapp.com";
 
 const auth = getAuth();
 
@@ -8,9 +8,11 @@ window.recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
 });
 
 // 2. Attach to window so HTML can see it
-window.sendOTP = function() {
-    const number = document.getElementById('phoneNumber').value;
-    const appVerifier = window.recaptchaVerifier;
+// Instead of window.sendOTP, just attach it to the ID
+document.getElementById('sendBtn').addEventListener('click', () => {
+    sendOTP();
+});
+
 
     signInWithPhoneNumber(auth, number, appVerifier)
         .then((confirmationResult) => {
@@ -30,9 +32,6 @@ window.verifyOTP = function() {
         window.location.href = "hub.html"; 
     }).catch((error) => {
         alert("Invalid Code!");
-      // Force these functions to be global so HTML buttons can see them
-window.sendOTP = sendOTP;
-window.verifyOTP = verifyOTP;
 
     });
 };
