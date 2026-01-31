@@ -1,4 +1,4 @@
-import { getAuth, RecaptchaVerifier, signInWithPhoneNumber } from "cheez-noodlez-8cd32.firebaseapp.com";
+import { getAuth, RecaptchaVerifier, signInWithPhoneNumber } from "https://cheez-noodlez-8cd32.firebaseapp.com";
 
 const auth = getAuth();
 
