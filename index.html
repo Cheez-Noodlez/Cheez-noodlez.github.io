@@ -411,6 +411,42 @@ body {
 #squad-header button, #squad-header a {
     -webkit-app-region: no-drag;
 }
+        .popup-content {
+  background: white;
+  padding: 50px;
+  border-radius: 15px;
+  text-align: center;
+  position: relative; /* Essential for positioning the X */
+  min-width: 300px;
+  box-shadow: 0px 10px 30px rgba(0,0,0,0.5);
+}
+
+.close-x {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 28px;
+  font-weight: bold;
+  color: #888;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.close-x:hover {
+  color: #000;
+}
+
+/* Optional styling for the quiz link */
+.quiz-link {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background: #ffcc00;
+  color: #333;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+}
 
     </style>
 </div>
@@ -426,6 +462,16 @@ body {
     function closeMe() {
         ipcRenderer.send('close-app');
     }
+    window.onload = function() {
+  if (!localStorage.getItem('hasVisited')) {
+    document.getElementById('first-visit-popup').style.display = 'flex';
+  }
+};
+
+function closePopup() {
+  localStorage.setItem('hasVisited', 'true');
+  document.getElementById('first-visit-popup').style.display = 'none';
+}
 </script>
 
 <body>
@@ -559,7 +605,15 @@ body {
             <button class="btn" onclick="document.getElementById('login-btn').click()">Become a Member</button>
         </div>
     </div>
-
+<div id="first-visit-popup" class="popup-overlay">
+  <div class="popup-content">
+    <span class="close-x" onclick="closePopup()">&times;</span>
+    
+    <h1>HEY YOU</h1>
+    <p>FIND OUT WHAT CHEESE YOU ARE TODAY!</p>
+    <a href="https://cheez-noodlez.online/quiz/index.html" class="quiz-link">Take the Quiz 🧀</a>
+  </div>
+</div>
     <!-- FIREBASE SETUP -->
     <script type="module">
         // 1. Import Firebase Libraries
