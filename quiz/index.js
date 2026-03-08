@@ -1,7 +1,7 @@
 function copyLink() {
     const siteLink = "cheez-noodlez.online";
     navigator.clipboard.writeText(siteLink);
-    alert("Link copied! Now go paste it on Discord! 🧀");
+    alert("Link copied! Now go paste it on Messages! 🧀");
 }
 const questions = [
         { q: "Pick a Friday night activity:", a: ["Cozy blanket", "Loud club", "Pranking friends", "Organizing socks"], types: ["A", "B", "C", "D"] },
@@ -61,5 +61,6 @@ const questions = [
                              <p style="font-size: 18px;">${results[winner].desc}</p>
                              <button onclick="location.reload()" style="padding: 10px 20px; background: #ffcc00; border: none; border-radius: 5px; cursor: pointer;">Try Again</button>`;
     }
+
 
     loadQuestion();
