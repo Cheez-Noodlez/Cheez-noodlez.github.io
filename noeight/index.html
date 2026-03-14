@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noeight | Professional PyQt6 Web Engine</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --brand-orange: #FF6B00;
+            --brand-yellow: #FFB800;
+            --brand-blue: #00A3FF;
+            --brand-purple: #8B5CF6;
+            --brand-dark: #050507;
+            --brand-border: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--brand-dark);
+            color: #F4F4F5;
+            scroll-behavior: smooth;
+        }
+
+        .text-balance { text-wrap: balance; }
+
+        .colorful-text {
+            background: linear-gradient(90deg, #FF6B00, #FFB800, #00A3FF, #8B5CF6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 300% 300%;
+            animation: gradient-flow 6s linear infinite;
+        }
+
+        @keyframes gradient-flow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .accent-gradient {
+            background: linear-gradient(135deg, #FF6B00 0%, #FFB800 100%);
+        }
+
+        .bento-card {
+            background: rgba(20, 20, 25, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--brand-border);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bento-card:hover {
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px);
+            background: rgba(28, 28, 35, 0.8);
+        }
+
+        .nav-blur {
+            background: rgba(10, 10, 12, 0.7);
+            backdrop-filter: saturate(180%) blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .hero-mesh {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(at 10% 20%, rgba(255, 107, 0, 0.15) 0px, transparent 50%),
+                radial-gradient(at 90% 10%, rgba(0, 163, 255, 0.1) 0px, transparent 50%),
+                radial-gradient(at 50% 90%, rgba(139, 92, 246, 0.1) 0px, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .rainbow-border {
+            position: relative;
+            padding: 1px;
+            background: linear-gradient(90deg, #FF6B00, #00A3FF, #8B5CF6);
+            border-radius: 1.5rem;
+        }
+
+        .rainbow-content {
+            background: var(--brand-dark);
+            border-radius: calc(1.5rem - 1px);
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .browser-container {
+            box-shadow: 0 40px 100px -20px rgba(0,0,0,0.9), 0 0 50px rgba(255, 107, 0, 0.15);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div class="hero-mesh"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="flex justify-between items-center nav-blur px-6 py-2 rounded-full shadow-2xl">
+                <div class="flex items-center gap-3">
+                    <img src="logo.png" alt="Noeight" class="w-8 h-8 rounded-lg">
+                    <span class="font-bold tracking-tight text-white text-lg">Noeight</span>
+                </div>
+                <div class="hidden md:flex gap-10 text-sm font-medium text-zinc-300">
+                    <a href="#features" class="hover:text-orange-400 transition-colors">Technology</a>
+                    <a href="#custom" class="hover:text-blue-400 transition-colors">Personalize</a>
+                    <a href="#specs" class="hover:text-purple-400 transition-colors">Specs</a>
+                </div>
+                <div class="flex items-center gap-4">
+                    <a href="https://github.com/Cheez-Noodlez/Cheez-noodlez.github.io/releases/download/6/app.exe" download class="accent-gradient text-white px-6 py-2 rounded-full text-sm font-bold shadow-lg shadow-orange-500/20 hover:scale-105 transition text-center">Download v1.1</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative pt-48 pb-16 px-6 overflow-hidden">
+        <div class="max-w-5xl mx-auto text-center">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-400 text-xs font-bold mb-8 uppercase tracking-widest">
+                Professional Python Web Engine
+            </div>
+            <h1 class="text-6xl md:text-8xl font-black tracking-tight mb-8 leading-tight">
+                The Web, in <br><span class="colorful-text">Vivid Motion.</span>
+            </h1>
+            <p class="text-zinc-400 text-xl max-w-2xl mx-auto mb-12 leading-relaxed">
+                Powered by PyQt6. Crafted for clarity. Noeight v1.1 brings 
+                industrial-strength performance to a lightweight, colorful interface.
+            </p>
+            
+            <!-- Main Preview Image -->
+            <div class="max-w-5xl mx-auto rainbow-border mb-16 reveal active browser-container">
+                <div class="rainbow-content overflow-hidden rounded-[1.4rem]">
+                    <img src="browser.png" alt="Noeight Browser Interface" class="w-full h-auto block" onerror="this.parentElement.innerHTML='<div class=\'py-32 text-zinc-600 font-bold bg-zinc-900\'>Browser Interface Preview [browser.png]</div>'">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bento Grid Features -->
+    <section id="features" class="py-24 px-6 bg-black relative">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-4">
+                <div>
+                    <h2 class="text-sm font-bold text-blue-500 uppercase tracking-widest mb-4">The Logic Layer</h2>
+                    <h3 class="text-4xl font-black">Refined PyQt6 Architecture.</h3>
+                </div>
+                <div class="text-zinc-500 text-sm max-w-xs">Zero bloat means zero compromises on speed.</div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                <!-- Theme Card -->
+                <div id="custom" class="md:col-span-2 bento-card p-10 rounded-3xl reveal group">
+                    <div class="absolute top-0 right-0 w-64 h-64 bg-orange-500/10 blur-3xl rounded-full -mr-20 -mt-20 group-hover:bg-orange-500/20 transition-all"></div>
+                    <div class="relative z-10">
+                        <div class="mb-6 w-14 h-14 rounded-2xl bg-orange-500/20 flex items-center justify-center text-2xl shadow-inner shadow-orange-500/50">🎨</div>
+                        <h4 class="text-2xl font-bold mb-4">QColorDialog Integration</h4>
+                        <p class="text-zinc-400">The <code>change_theme()</code> engine allows you to inject real-time CSS Stylesheets into the UI. Define your mood with a single click.</p>
+                    </div>
+                </div>
+
+                <!-- Memory Card -->
+                <div class="md:col-span-2 bento-card p-10 rounded-3xl reveal bg-gradient-to-br from-blue-500/5 to-transparent">
+                    <div class="relative z-10">
+                        <div class="mb-6 w-14 h-14 rounded-2xl bg-blue-500/20 flex items-center justify-center text-2xl shadow-inner shadow-blue-500/50">⚡</div>
+                        <h4 class="text-2xl font-bold mb-4">RAM Optimization</h4>
+                        <p class="text-zinc-400">Noeight utilizes the <code>deleteLater()</code> signal to ensure closed tabs are fully purged from memory, keeping your system lean.</p>
+                    </div>
+                </div>
+
+                <!-- Tab Card -->
+                <div class="md:col-span-1 bento-card p-8 rounded-3xl reveal border-l-4 border-l-purple-500">
+                    <h4 class="text-lg font-bold mb-2">QTabWidget</h4>
+                    <p class="text-zinc-500 text-xs">Asynchronous tab management for seamless multitasking across sessions.</p>
+                </div>
+
+                <!-- URL Card -->
+                <div class="md:col-span-1 bento-card p-8 rounded-3xl reveal border-l-4 border-l-orange-500">
+                    <h4 class="text-lg font-bold mb-2">Omni-Nav</h4>
+                    <p class="text-zinc-500 text-xs">Smart URL detection with integrated Google Search fallback logic.</p>
+                </div>
+
+                <!-- Style Card -->
+                <div class="md:col-span-2 bento-card p-8 rounded-3xl reveal flex items-center gap-6 bg-zinc-900/40">
+                    <div class="w-16 h-16 rounded-xl bg-gradient-to-tr from-orange-500 to-yellow-500 flex-shrink-0 animate-pulse"></div>
+                    <div>
+                        <h4 class="text-lg font-bold">Fusion Style Engine</h4>
+                        <p class="text-zinc-500 text-xs">Consistent cross-platform rendering for Windows, Mac, and Linux environments.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technical Specs -->
+    <section id="specs" class="py-24 px-6 border-t border-white/5">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-center text-3xl font-black mb-16 colorful-text">Technical Specifications</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="p-6 rounded-2xl bg-zinc-900/50 border border-white/5 flex justify-between items-center">
+                    <span class="text-zinc-500 font-medium">Framework</span>
+                    <span class="text-orange-400 font-bold">PyQt6</span>
+                </div>
+                <div class="p-6 rounded-2xl bg-zinc-900/50 border border-white/5 flex justify-between items-center">
+                    <span class="text-zinc-500 font-medium">Engine</span>
+                    <span class="text-blue-400 font-bold">QtWebEngine</span>
+                </div>
+                <div class="p-6 rounded-2xl bg-zinc-900/50 border border-white/5 flex justify-between items-center">
+                    <span class="text-zinc-500 font-medium">Language</span>
+                    <span class="text-yellow-400 font-bold">Python 3.x</span>
+                </div>
+                <div class="p-6 rounded-2xl bg-zinc-900/50 border border-white/5 flex justify-between items-center">
+                    <span class="text-zinc-500 font-medium">UI Style</span>
+                    <span class="text-purple-400 font-bold">Fusion</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-32 px-6 relative overflow-hidden">
+        <div class="absolute inset-0 bg-orange-600/5 blur-[120px] -z-10"></div>
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-5xl font-black mb-8">Ready for the Next Level?</h2>
+            <p class="text-zinc-400 text-lg mb-12">Noeight v1.1 is open for the power-user community. Lightweight, fast, and yours to customize.</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="https://github.com/Cheez-Noodlez/Cheez-noodlez.github.io/releases/download/6/app.exe" download class="accent-gradient px-12 py-5 rounded-2xl text-lg font-bold shadow-2xl shadow-orange-500/40 hover:scale-105 transition text-white">Download Now</a>
+                <button class="px-12 py-5 rounded-2xl text-lg font-bold border border-white/10 hover:bg-white/5 transition">Documentation</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-6 border-t border-white/5 bg-[#030305]">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center">
+            <div class="flex items-center gap-3 mb-6 md:mb-0">
+                <img src="logo.png" alt="Noeight" class="w-6 h-6 rounded opacity-80">
+                <span class="text-zinc-500 font-bold">Noeight <span class="text-orange-500">v1.1</span></span>
+            </div>
+            <div class="flex gap-10 text-zinc-600 text-xs font-bold uppercase tracking-widest">
+                <a href="https://github.com/Cheez-Noodlez/Cheez-noodlez.github.io/releases/download/6/app.exe" class="hover:text-white transition">Source</a>
+                <a href="#" class="hover:text-white transition">Security</a>
+                <a href="#" class="hover:text-white transition">Python Lab</a>
+            </div>
+            <div class="mt-6 md:mt-0 text-zinc-700 text-[10px] font-medium">
+                © 2025 NOEIGHT TECHNOLOGIES. BUILT WITH PYQT6.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 100;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        reveal();
+    </script>
+</body>
+</html>
